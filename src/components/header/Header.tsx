@@ -11,7 +11,7 @@ export default function Header() {
                 Ministry of Public Administration, Provincial Councils and Local
                 Government
               </h3>
-              <h1>Recruitment Data Collection System</h1>
+              <h1>Candidate Evaluation Management System (CEMS)</h1>
               <h2>
                 ශ්‍රී ලංකා තොරතුරු හා සන්නිවේදන තාක්ෂණ සේවයේ 1 වන පන්තියේ III ශ්‍රේණියට බඳවා ගැනීමේ සීමිත තරග විභාගය - 2025
               </h2>

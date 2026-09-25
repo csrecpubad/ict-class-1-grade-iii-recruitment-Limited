@@ -1,10 +1,12 @@
 import type {
   GeneralDetails,
   PersonalDetails,
-  MSOExamDetails,
-  OLevelDetails,
-  ALevelDetails,
 } from "../types/recruitment";
+
+import type {
+  EmploymentDetails,
+  EducationQualifications,
+} from "../types/ict";
 
 import { validateNIC } from "./nic";
 
@@ -27,20 +29,6 @@ function required(
   return "";
 }
 
-function isValidYear(
-  value: string,
-  minimumYear = 1950
-): boolean {
-  if (!/^\d{4}$/.test(value)) {
-    return false;
-  }
-
-  const year = Number(value);
-  const currentYear = new Date().getFullYear();
-
-  return year >= minimumYear && year <= currentYear;
-}
-
 function isValidDate(value: string): boolean {
   if (!value) {
     return false;
@@ -61,12 +49,6 @@ function isFutureDate(value: string): boolean {
   return date > today;
 }
 
-function isValidGrade(value: string): boolean {
-  return ["A", "B", "C", "S", "F"].includes(
-    value.trim().toUpperCase()
-  );
-}
-
 function removeEmptyErrors(
   errors: FormErrors
 ): FormErrors {
@@ -77,15 +59,27 @@ function removeEmptyErrors(
   );
 }
 
+/* =========================================================
+   GENERAL DETAILS
+========================================================= */
+
 export function validateGeneralDetails(
   data: GeneralDetails
 ): FormErrors {
   const errors: FormErrors = {};
 
+  /* -----------------------------------------------
+     Interview Calling Number
+  ------------------------------------------------ */
+
   errors.callingNumber = required(
     data.callingNumber,
     "Interview calling number"
   );
+
+  /* -----------------------------------------------
+     Email
+  ------------------------------------------------ */
 
   if (!data.email.trim()) {
     errors.email =
@@ -112,7 +106,7 @@ export function validatePersonalDetails(
   const errors: FormErrors = {};
 
   /* -----------------------------------------------
-     Names
+     Name with initials
   ------------------------------------------------ */
 
   errors.nameSinhala = required(
@@ -125,10 +119,18 @@ export function validatePersonalDetails(
     "Name with initials in English"
   );
 
+  /* -----------------------------------------------
+     Prefix
+  ------------------------------------------------ */
+
   errors.prefix = required(
     data.prefix,
     "Prefix"
   );
+
+  /* -----------------------------------------------
+     Full name
+  ------------------------------------------------ */
 
   errors.fullNameSinhala = required(
     data.fullNameSinhala,
@@ -169,7 +171,7 @@ export function validatePersonalDetails(
   );
 
   /* -----------------------------------------------
-     Addresses
+     Permanent Address
   ------------------------------------------------ */
 
   errors.permanentAddress = required(
@@ -177,13 +179,17 @@ export function validatePersonalDetails(
     "Permanent address"
   );
 
+  /* -----------------------------------------------
+     Appointment Address
+  ------------------------------------------------ */
+
   errors.appointmentAddress = required(
     data.appointmentAddress,
     "Appointment letter mailing address"
   );
 
   /* -----------------------------------------------
-     District
+     Residential District
   ------------------------------------------------ */
 
   errors.residentialDistrict = required(
@@ -196,8 +202,13 @@ export function validatePersonalDetails(
   ------------------------------------------------ */
 
   if (!data.mobile.trim()) {
-    errors.mobile = "Mobile number is required.";
-  } else if (!/^07\d{8}$/.test(data.mobile.trim())) {
+    errors.mobile =
+      "Mobile number is required.";
+  } else if (
+    !/^07\d{8}$/.test(
+      data.mobile.trim()
+    )
+  ) {
     errors.mobile =
       "Enter a valid mobile number. Example: 0712345678";
   }
@@ -207,7 +218,11 @@ export function validatePersonalDetails(
   ------------------------------------------------ */
 
   if (data.whatsapp.trim()) {
-    if (!/^07\d{8}$/.test(data.whatsapp.trim())) {
+    if (
+      !/^07\d{8}$/.test(
+        data.whatsapp.trim()
+      )
+    ) {
       errors.whatsapp =
         "Enter a valid WhatsApp number. Example: 0712345678";
     }
@@ -220,10 +235,14 @@ export function validatePersonalDetails(
   if (!data.birthday.trim()) {
     errors.birthday =
       "Date of birth is required.";
-  } else if (!isValidDate(data.birthday)) {
+  } else if (
+    !isValidDate(data.birthday)
+  ) {
     errors.birthday =
       "Enter a valid date of birth.";
-  } else if (isFutureDate(data.birthday)) {
+  } else if (
+    isFutureDate(data.birthday)
+  ) {
     errors.birthday =
       "Date of birth cannot be in the future.";
   }
@@ -237,528 +256,267 @@ export function validatePersonalDetails(
       "Age could not be calculated from the date of birth.";
   }
 
-  /* -----------------------------------------------
-     Current Position
-  ------------------------------------------------ */
-
-//   errors.currentPosition = required(
-//     data.currentPosition,
-//     "Current position"
-//   );
-
-  /* -----------------------------------------------
-     Workplace
-  ------------------------------------------------ */
-
-//   errors.workPlace = required(
-//     data.workPlace,
-//     "Work place"
-//   );
+  /*
+   * Current position and workplace are intentionally
+   * not validated here because ICT employment details
+   * are handled separately.
+   */
 
   return removeEmptyErrors(errors);
 }
 
 /* =========================================================
-   MSO EXAM DETAILS
+   EMPLOYMENT DETAILS
 ========================================================= */
 
-export function validateMSOExamDetails(
-  data: MSOExamDetails
+export function validateEmploymentDetails(
+  data: EmploymentDetails
 ): FormErrors {
   const errors: FormErrors = {};
 
   /* -----------------------------------------------
-     Examination Number
+     Public Sector Employment
   ------------------------------------------------ */
 
-  errors.msoExamNumber = required(
-    data.msoExamNumber,
-    "MSO examination number"
-  );
-
-  /* -----------------------------------------------
-     Marks
-  ------------------------------------------------ */
-
-  if (!data.msoMarks.trim()) {
-    errors.msoMarks =
-      "MSO marks are required.";
-  } else {
-    const marks = Number(data.msoMarks);
-
-    if (
-      !Number.isFinite(marks) ||
-      marks < 0 ||
-      marks > 200
-    ) {
-      errors.msoMarks =
-        "MSO marks must be between 0 and 200.";
-    }
-  }
-
-  /* -----------------------------------------------
-     Rank
-  ------------------------------------------------ */
-
-  if (!data.msoRank.trim()) {
-    errors.msoRank =
-      "MSO rank is required.";
-  } else if (!/^\d+$/.test(data.msoRank.trim())) {
-    errors.msoRank =
-      "MSO rank must be a whole number.";
-  } else if (Number(data.msoRank) <= 0) {
-    errors.msoRank =
-      "MSO rank must be greater than 0.";
-  }
-
-  /* -----------------------------------------------
-     Medium
-  ------------------------------------------------ */
-
-  errors.msoMedium = required(
-    data.msoMedium,
-    "Examination medium"
-  );
-
-  /* -----------------------------------------------
-     District
-  ------------------------------------------------ */
-
-  errors.examDistrict = required(
-    data.examDistrict,
-    "Selected district"
-  );
-
-  /* -----------------------------------------------
-     District Qualification
-  ------------------------------------------------ */
-
-  errors.selectedDistrictQualification =
+  errors.isPublicSectorEmployee =
     required(
-      data.selectedDistrictQualification,
-      "District qualification"
+      data.isPublicSectorEmployee,
+      "Public sector employment status"
     );
 
-  return removeEmptyErrors(errors);
-}
-
-/* =========================================================
-   O/L DETAILS
-========================================================= */
-
-export function validateOLevelDetails(
-  data: OLevelDetails
-): FormErrors {
-
-  const errors: FormErrors = {};
-
-
   /* -----------------------------------------------
-     O/L Year
+     Service Particulars
+     
+     Required only if the applicant is employed
+     in the public sector.
   ------------------------------------------------ */
 
-  if (!data.olYear.trim()) {
-
-    errors.olYear =
-      "O/L year is required.";
-
-  } else if (!isValidYear(data.olYear)) {
-
-    errors.olYear =
-      "Enter a valid 4-digit O/L year.";
-
+  if (
+    data.isPublicSectorEmployee ===
+    "Yes"
+  ) {
+    errors.serviceParticulars =
+      required(
+        data.serviceParticulars,
+        "Service particulars"
+      );
   }
 
-
   /* -----------------------------------------------
-     O/L Index
+     Work Place
   ------------------------------------------------ */
 
-  errors.olIndex = required(
-    data.olIndex,
-    "O/L index number"
+  errors.workplace = required(
+    data.workplace,
+    "Work place"
   );
-
-
-  /* -----------------------------------------------
-     REQUIRED SUBJECTS
-  ------------------------------------------------ */
-
-  const requiredResultFields: {
-    field: "maths" | "language";
-    label: string;
-  }[] = [
-
-    {
-      field: "maths",
-      label: "Mathematics",
-    },
-
-    {
-      field: "language",
-      label: "Language",
-    },
-
-  ];
-
-
-  requiredResultFields.forEach(
-    ({ field, label }) => {
-
-      const value = data[field].trim();
-
-
-      if (!value) {
-
-        errors[field] =
-          `${label} result is required.`;
-
-        return;
-      }
-
-
-      /*
-       * Expected format:
-       *
-       * Mathematics-A
-       * Sinhala-A
-       * Tamil-B
-       * English-C
-       *
-       * The final grade must be:
-       * A, B, C, S or F
-       */
-
-      const subjectResultPattern =
-        /^.+\s*-\s*[ABCSF]$/i;
-
-
-      if (!subjectResultPattern.test(value)) {
-
-        errors[field] =
-          `${label} must be entered as Subject-Result. Example: ${label}-A`;
-
-      }
-
-    }
-  );
-
-
-  /* -----------------------------------------------
-     OPTIONAL O/L SUBJECTS
-  ------------------------------------------------ */
-
-  const optionalResultFields: {
-    field:
-      | "sub3"
-      | "sub4"
-      | "sub5"
-      | "sub6"
-      | "sub7"
-      | "sub8"
-      | "sub9";
-
-    label: string;
-
-  }[] = [
-
-    {
-      field: "sub3",
-      label: "O/L subject 3",
-    },
-
-    {
-      field: "sub4",
-      label: "O/L subject 4",
-    },
-
-    {
-      field: "sub5",
-      label: "O/L subject 5",
-    },
-
-    {
-      field: "sub6",
-      label: "O/L subject 6",
-    },
-
-    {
-      field: "sub7",
-      label: "O/L subject 7",
-    },
-
-    {
-      field: "sub8",
-      label: "O/L subject 8",
-    },
-
-    {
-      field: "sub9",
-      label: "O/L subject 9",
-    },
-
-  ];
-
-
-  optionalResultFields.forEach(
-    ({ field, label }) => {
-
-      const value = data[field].trim();
-
-
-      /*
-       * Empty optional subjects are allowed.
-       */
-
-      if (!value) {
-        return;
-      }
-
-
-      /*
-       * If the applicant enters a subject,
-       * it must contain the subject name
-       * and result.
-       *
-       * Examples:
-       *
-       * History-A
-       * Science-B
-       * Commerce-C
-       * ICT-S
-       */
-
-      const subjectResultPattern =
-        /^.+\s*-\s*[ABCSF]$/i;
-
-
-      if (!subjectResultPattern.test(value)) {
-
-        errors[field] =
-          `${label} must be entered as Subject-Result. Example: History-A`;
-
-      }
-
-    }
-  );
-
 
   return removeEmptyErrors(errors);
 }
 
 /* =========================================================
-   A/L DETAILS
+   EDUCATION QUALIFICATIONS
 ========================================================= */
 
-export function validateALevelDetails(
-  data: ALevelDetails
+export function validateEducationQualifications(
+  data: EducationQualifications
 ): FormErrors {
   const errors: FormErrors = {};
 
   /* -----------------------------------------------
-     A/L Year
+     Education Qualification
+     
+     The document specifies:
+     Full BSc. in ICT (3 years)
   ------------------------------------------------ */
 
-  if (!data.alYear.trim()) {
-    errors.alYear =
-      "A/L year is required.";
-  } else if (!isValidYear(data.alYear)) {
-    errors.alYear =
-      "Enter a valid 4-digit A/L year.";
+  errors.qualification =
+    required(
+      data.qualification,
+      "Education qualification"
+    );
+
+  /* -----------------------------------------------
+     GCE A/L
+  ------------------------------------------------ */
+
+  errors.alPassed =
+    required(
+      data.alPassed,
+      "GCE A/L result"
+    );
+
+  /* -----------------------------------------------
+     A/L Stream
+     
+     Required when GCE A/L is passed.
+  ------------------------------------------------ */
+
+  if (
+    data.alPassed === "Passed"
+  ) {
+    errors.alStream =
+      required(
+        data.alStream,
+        "A/L stream"
+      );
   }
 
   /* -----------------------------------------------
-     A/L Index
+     Specialized Fields
   ------------------------------------------------ */
 
-  errors.alIndex = required(
-    data.alIndex,
-    "A/L index number"
+  data.specializedFields.forEach(
+    (field, index) => {
+
+      if (
+        field.rating === null
+      ) {
+        errors[
+          `specializedFields.${index}`
+        ] =
+          `${field.field} rating is required.`;
+      }
+
+    }
   );
 
   /* -----------------------------------------------
-     Stream
+     Professional Memberships
   ------------------------------------------------ */
 
-  errors.stream = required(
-    data.stream,
-    "A/L stream"
-  );
+  errors.professionalMemberships =
+    required(
+      data.professionalMemberships,
+      "Professional memberships"
+    );
 
   /* -----------------------------------------------
-   A/L Results
------------------------------------------------- */
+     Professional Qualifications
+  ------------------------------------------------ */
 
-const alResultFields: {
-  field: "alSub1" | "alSub2" | "alSub3";
-  label: string;
-}[] = [
-  {
-    field: "alSub1",
-    label: "A/L subject 1",
-  },
-  {
-    field: "alSub2",
-    label: "A/L subject 2",
-  },
-  {
-    field: "alSub3",
-    label: "A/L subject 3",
-  },
-];
+  errors.professionalQualifications =
+    required(
+      data.professionalQualifications,
+      "Professional qualifications"
+    );
 
+  /* -----------------------------------------------
+     Professional Qualifications - Other
+  ------------------------------------------------ */
 
-alResultFields.forEach(
-  ({ field, label }) => {
+  /*
+   * This field is optional because it is only
+   * applicable when the applicant has another
+   * professional qualification.
+   */
 
-    const value = data[field].trim();
+  /* -----------------------------------------------
+     Technology Skills
+  ------------------------------------------------ */
 
+  errors.technologySkills =
+    required(
+      data.technologySkills,
+      "Programming languages, frameworks and related technologies"
+    );
 
-    /* -------------------------------------------
-       Required
-    ------------------------------------------- */
+  /* -----------------------------------------------
+     Research Paper
+  ------------------------------------------------ */
 
-    if (!value) {
+  /*
+   * Research papers are not made mandatory here.
+   * The document asks for these details, but it
+   * does not indicate that every applicant must
+   * have a published research paper.
+   */
 
-      errors[field] =
-        `${label} result is required.`;
-
-      return;
-    }
-
-
-    /* -------------------------------------------
-       Subject + Result validation
-       
-       Examples:
-       Physics-A
-       Chemistry-B
-       Biology-C
-       Combined Mathematics-S
-    ------------------------------------------- */
-
-    const subjectResultPattern =
-      /^.+\s*-\s*[ABCSF]$/i;
-
-
-    if (!subjectResultPattern.test(value)) {
-
-      errors[field] =
-        `${label} must be entered as Subject-Result. Example: Physics-A`;
-
-    }
-
-  }
-);
-
-
-/* -----------------------------------------------
-   General English
------------------------------------------------- */
-
-errors.generalEnglish = required(
-  data.generalEnglish,
-  "General English selection"
-);
-
-
-/* -----------------------------------------------
-   General English Grade
------------------------------------------------- */
-
-if (data.generalEnglish === "Yes") {
-
-  if (!data.geGrade.trim()) {
-
-    errors.geGrade =
-      "General English grade is required.";
-
-  } else if (!isValidGrade(data.geGrade)) {
-
-    errors.geGrade =
-      "General English grade must be A, B, C, or S.";
-
-  } else if (
-    data.geGrade.toUpperCase() === "F"
+  if (
+    data.researchPaper.topic.trim()
   ) {
 
-    errors.geGrade =
-      "General English grade must be A, B, C, or S.";
+    if (
+      !data.researchPaper.year.trim()
+    ) {
+      errors[
+        "researchPaper.year"
+      ] =
+        "Research paper year is required.";
+    }
 
-  }
+    if (
+      !data.researchPaper.type
+    ) {
+      errors[
+        "researchPaper.type"
+      ] =
+        "Select Local or International.";
+    }
 
-}
-  /* -----------------------------------------------
-     Degree Qualification
-  ------------------------------------------------ */
-
-  errors.degreeQualification = required(
-    data.degreeQualification,
-    "Degree qualification"
-  );
-
-  /* -----------------------------------------------
-     Degree details
-  ------------------------------------------------ */
-
-  if (data.degreeQualification === "Yes") {
-
-    errors.degree = required(
-      data.degree,
-      "Degree"
-    );
-
-    errors.university = required(
-      data.university,
-      "University"
-    );
-
-    if (!data.degreeDate.trim()) {
-      errors.degreeDate =
-        "Degree date is required.";
-    } else if (!isValidDate(data.degreeDate)) {
-      errors.degreeDate =
-        "Enter a valid degree date.";
-    } else if (isFutureDate(data.degreeDate)) {
-      errors.degreeDate =
-        "Degree date cannot be in the future.";
+    if (
+      !data.researchPaper
+        .instituteOrMagazine
+        .trim()
+    ) {
+      errors[
+        "researchPaper.instituteOrMagazine"
+      ] =
+        "Institute / Magazine is required.";
     }
   }
 
+  /* -----------------------------------------------
+     Awards
+  ------------------------------------------------ */
+
+  /*
+   * Awards are optional.
+   */
   return removeEmptyErrors(errors);
+}
+
+/* =========================================================
+   COMPLETE FORM DATA
+========================================================= */
+
+export interface CompleteFormData {
+  general: GeneralDetails;
+  personal: PersonalDetails;
+  employment: EmploymentDetails;
+  education: EducationQualifications;
+  declarationAccepted: boolean;
 }
 
 /* =========================================================
    COMPLETE FORM VALIDATION
 ========================================================= */
 
-export interface CompleteFormData {
-  general: GeneralDetails;
-  personal: PersonalDetails;
-  msoExam: MSOExamDetails;
-  ol: OLevelDetails;
-  al: ALevelDetails;
-  declarationAccepted: boolean;
-}
-
 export function validateForm(
   data: CompleteFormData
 ): FormErrors {
-
   const errors: FormErrors = {};
-const generalErrors =
-  validateGeneralDetails(
-    data.general
+
+  /* -----------------------------------------------
+     General Details
+  ------------------------------------------------ */
+
+  const generalErrors =
+    validateGeneralDetails(
+      data.general
+    );
+
+  Object.entries(
+    generalErrors
+  ).forEach(
+    ([field, message]) => {
+      errors[`general.${field}`] =
+        message;
+    }
   );
 
-Object.entries(generalErrors).forEach(
-  ([field, message]) => {
-    errors[`general.${field}`] =
-      message;
-  }
-);
   /* -----------------------------------------------
-     Personal
+     Personal Details
   ------------------------------------------------ */
 
   const personalErrors =
@@ -766,7 +524,9 @@ Object.entries(generalErrors).forEach(
       data.personal
     );
 
-  Object.entries(personalErrors).forEach(
+  Object.entries(
+    personalErrors
+  ).forEach(
     ([field, message]) => {
       errors[`personal.${field}`] =
         message;
@@ -774,58 +534,60 @@ Object.entries(generalErrors).forEach(
   );
 
   /* -----------------------------------------------
-     MSO Exam
+     Employment Details
   ------------------------------------------------ */
 
-  const examErrors =
-    validateMSOExamDetails(
-      data.msoExam
+  const employmentErrors =
+    validateEmploymentDetails(
+      data.employment
     );
 
-  Object.entries(examErrors).forEach(
+  Object.entries(
+    employmentErrors
+  ).forEach(
     ([field, message]) => {
-      errors[`msoExam.${field}`] =
+      errors[`employment.${field}`] =
         message;
     }
   );
 
   /* -----------------------------------------------
-     O/L
+     Education Qualifications
   ------------------------------------------------ */
 
-  const olErrors =
-    validateOLevelDetails(
-      data.ol
+  const educationErrors =
+    validateEducationQualifications(
+      data.education
     );
 
-  Object.entries(olErrors).forEach(
+  Object.entries(
+    educationErrors
+  ).forEach(
     ([field, message]) => {
-      errors[`ol.${field}`] =
+      errors[`education.${field}`] =
         message;
     }
   );
+// const qualificationErrors =
+//   validateICTQualificationDetails(
+//     data.education
+//   );
 
-  /* -----------------------------------------------
-     A/L
-  ------------------------------------------------ */
-
-  const alErrors =
-    validateALevelDetails(
-      data.al
-    );
-
-  Object.entries(alErrors).forEach(
-    ([field, message]) => {
-      errors[`al.${field}`] =
-        message;
-    }
-  );
-
+// Object.entries(
+//   qualificationErrors
+// ).forEach(
+//   ([field, message]) => {
+//     errors[`education.${field}`] =
+//       message;
+//   }
+// );
   /* -----------------------------------------------
      Declaration
   ------------------------------------------------ */
 
-  if (!data.declarationAccepted) {
+  if (
+    !data.declarationAccepted
+  ) {
     errors.declaration =
       "You must accept the declaration before submitting the application.";
   }

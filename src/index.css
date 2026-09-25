@@ -1520,3 +1520,366 @@ img {
 
     gap: 12px;
   }}
+
+  /* =========================================================
+   SPECIALIZED FIELDS TABLE
+========================================================= */
+
+.specialized-fields-table {
+  width: 100%;
+  margin-top: 16px;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* ---------------------------------------------------------
+   HEADER
+--------------------------------------------------------- */
+
+.specialized-header {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+
+  background: #f3f6f9;
+  border-bottom: 1px solid #d9e2ec;
+
+  font-weight: 600;
+  color: #243b53;
+}
+
+.specialized-header > div {
+  padding: 14px 16px;
+}
+
+.specialized-header > div:last-child {
+  text-align: center;
+  border-left: 1px solid #d9e2ec;
+}
+
+/* ---------------------------------------------------------
+   ROW
+--------------------------------------------------------- */
+
+.specialized-row {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+
+  min-height: 58px;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.specialized-row:last-child {
+  border-bottom: none;
+}
+
+/* ---------------------------------------------------------
+   FIELD NAME
+--------------------------------------------------------- */
+
+.specialized-field-name {
+  display: flex;
+  align-items: center;
+
+  padding: 12px 16px;
+
+  color: #263238;
+  font-size: 14px;
+}
+
+/* ---------------------------------------------------------
+   RATING AREA
+--------------------------------------------------------- */
+
+.specialized-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+
+  padding: 10px 16px;
+
+  border-left: 1px solid #e5e7eb;
+}
+
+/* ---------------------------------------------------------
+   RATING OPTION
+--------------------------------------------------------- */
+
+.rating-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+  color: #263238;
+
+  user-select: none;
+}
+
+.rating-option input[type="radio"] {
+  width: 17px;
+  height: 17px;
+
+  margin: 0;
+
+  cursor: pointer;
+
+  accent-color: #0f4c81;
+}
+
+.rating-option span {
+  min-width: 14px;
+
+  text-align: center;
+
+  font-weight: 500;
+}
+
+/* ---------------------------------------------------------
+   HOVER EFFECT
+--------------------------------------------------------- */
+
+.specialized-row:hover {
+  background: #f8fafc;
+}
+
+.rating-option:hover {
+  color: #0f4c81;
+}
+
+/* ---------------------------------------------------------
+   MOBILE
+--------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .specialized-header,
+  .specialized-row {
+    grid-template-columns: 1fr;
+  }
+
+  .specialized-header > div:last-child {
+    display: none;
+  }
+
+  .specialized-field-name {
+    padding-bottom: 4px;
+
+    font-weight: 500;
+  }
+
+  .specialized-rating {
+    justify-content: flex-start;
+
+    padding: 8px 16px 14px;
+
+    border-left: none;
+  }
+
+}
+
+ /* =========================================================
+    ICT QUALIFICATION SECTIONS
+ ========================================================= */
+
+.form-section {
+  margin-top: 28px;
+}
+
+.form-section:first-child {
+  margin-top: 0;
+}
+
+/* ---------------------------------------------------------
+   SECTION SUBTITLE
+--------------------------------------------------------- */
+
+.section-subtitle {
+  margin: 0 0 16px 0;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  color: #0f4c81;
+
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------
+   PROFESSIONAL / TECHNOLOGY / AWARDS FIELD CONTAINER
+--------------------------------------------------------- */
+
+.form-section .form-group {
+  margin-bottom: 0;
+}
+
+.form-section .form-group + .form-group {
+  margin-top: 16px;
+}
+
+/* ---------------------------------------------------------
+   FULL WIDTH INPUTS
+--------------------------------------------------------- */
+
+.form-section .full-width {
+  width: 100%;
+}
+
+/* ---------------------------------------------------------
+   TEXTAREA-LIKE LONG INPUTS
+--------------------------------------------------------- */
+
+.form-section input[type="text"],
+.form-section input[type="number"] {
+  width: 100%;
+}
+
+/* =========================================================
+   RESEARCH PAPERS
+========================================================= */
+
+.research-paper-section {
+  margin-top: 28px;
+
+  padding: 20px;
+
+  background: #f8fafc;
+
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+}
+
+.research-paper-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px 20px;
+}
+
+/* ---------------------------------------------------------
+   RESEARCH TOPIC
+--------------------------------------------------------- */
+
+.research-paper-topic {
+  grid-column: 1 / -1;
+}
+
+/* ---------------------------------------------------------
+   RESEARCH INSTITUTE / MAGAZINE
+--------------------------------------------------------- */
+
+.research-paper-institute {
+  grid-column: 1 / -1;
+}
+
+/* ---------------------------------------------------------
+   RESEARCH TYPE
+--------------------------------------------------------- */
+
+.research-paper-type {
+  width: 100%;
+}
+
+/* =========================================================
+   PROFESSIONAL MEMBERSHIPS
+========================================================= */
+
+.professional-membership-section {
+  padding: 18px 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+}
+
+/* =========================================================
+   PROFESSIONAL QUALIFICATIONS
+========================================================= */
+
+.professional-qualification-section {
+  padding: 18px 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+}
+
+/* =========================================================
+   TECHNOLOGY SKILLS
+========================================================= */
+
+.technology-skills-section {
+  padding: 18px 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+}
+
+/* =========================================================
+   AWARDS
+========================================================= */
+
+.awards-section {
+  padding: 18px 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+}
+
+/* =========================================================
+   SECTION DESCRIPTION / HELP TEXT
+========================================================= */
+
+.form-section-description {
+  margin: -6px 0 16px 0;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  color: #607d8b;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .research-paper-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .research-paper-topic,
+  .research-paper-institute {
+    grid-column: auto;
+  }
+
+  .professional-membership-section,
+  .professional-qualification-section,
+  .technology-skills-section,
+  .awards-section,
+  .research-paper-section {
+    padding: 16px;
+  }
+
+  .section-subtitle {
+    font-size: 16px;
+  }
+
+}

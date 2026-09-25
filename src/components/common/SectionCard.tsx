@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 interface SectionCardProps {
-  number: string;
+  number?: string;
   title: string;
   description?: string;
   children: ReactNode;

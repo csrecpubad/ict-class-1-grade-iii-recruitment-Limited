@@ -3,14 +3,12 @@ interface TextFieldProps {
   name: string;
   value: string;
   onChange: (value: string) => void;
-
   placeholder?: string;
   example?: string;
   required?: boolean;
   disabled?: boolean;
   maxLength?: number;
   type?: "text" | "email" | "tel" | "number";
-
   error?: string;
   fullWidth?: boolean;
 }

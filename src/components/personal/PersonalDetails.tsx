@@ -342,24 +342,24 @@ export default function PersonalDetails({
         />
 
         {/* Current Position */}
-        <TextField
+        {/* <TextField
           label="If currently employed in public service, Current Position / දැනට ඔබ දරන තනතුර"
           name="currentPosition"
           value={data.currentPosition}
           onChange={(value) => onChange("currentPosition", value)}
           placeholder="Current Position"
           error={errors.currentPosition}
-        />
+        /> */}
 
         {/* Workplace */}
-        <TextField
+        {/* <TextField
           label="Current Workplace / වර්තමාන සේවා ස්ථානය"
           name="workPlace"
           value={data.workPlace}
           onChange={(value) => onChange("workPlace", value)}
           placeholder="Enter current workplace"
           error={errors.workPlace}
-        />
+        /> */}
       </div>
     </SectionCard>
   );
