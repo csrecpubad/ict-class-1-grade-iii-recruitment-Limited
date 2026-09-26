@@ -13,7 +13,7 @@ export default function Footer() {
         </p>
 
         <p className="footer-system">
-          <strong>Recruitment Data Collection System</strong>
+          <strong>Candidate Evaluation Management System (CEMS)</strong>
         </p>
 
         <p className="footer-version">

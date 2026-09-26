@@ -76,7 +76,7 @@ export default function ICTEducationQualifications({
     Education Qualifications
   </h3>
 
-  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+  <div className="form-grid">
     <TextField
       label="Education Qualification"
       name="qualification"
@@ -123,7 +123,7 @@ export default function ICTEducationQualifications({
     />
   </div>
 
-
+<br/>
   {/* =================================================
       SPECIALIZED FIELDS
   ================================================= */}
@@ -196,7 +196,7 @@ export default function ICTEducationQualifications({
     </div>
   </div>
 
-
+<br/>
   {/* =================================================
       PROFESSIONAL MEMBERSHIPS
   ================================================= */}
@@ -221,7 +221,7 @@ export default function ICTEducationQualifications({
     />
   </div>
 
-
+<br/>
   {/* =================================================
       PROFESSIONAL QUALIFICATIONS
   ================================================= */}
@@ -262,7 +262,7 @@ export default function ICTEducationQualifications({
     </div>
   </div>
 
-
+<br/>
   {/* =================================================
       TECHNOLOGY SKILLS
   ================================================= */}
@@ -288,7 +288,7 @@ export default function ICTEducationQualifications({
     />
   </div>
 
-
+      <br/>
   {/* =================================================
       RESEARCH PAPERS
   ================================================= */}
@@ -298,7 +298,7 @@ export default function ICTEducationQualifications({
       Published Research Papers
     </h3>
 
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div className="form-grid">
 
       <TextField
         label="Topic"
@@ -383,7 +383,7 @@ export default function ICTEducationQualifications({
     </div>
   </div>
 
-
+<br/>
   {/* =================================================
       AWARDS
   ================================================= */}

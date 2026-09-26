@@ -1,471 +1,3 @@
-/* * {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f7fa;
-  color: #1f2937;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-h1,
-h2,
-p {
-  margin-top: 0;
-}
-
-.form-section {
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 30px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.section-header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 30px;
-}
-
-.section-number {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 45px;
-  height: 45px;
-
-  border-radius: 10px;
-
-  background: #0f3d73;
-  color: white;
-
-  font-weight: 700;
-}
-
-.section-header h2 {
-  margin-bottom: 4px;
-}
-
-.section-header p {
-  margin: 0;
-  color: #6b7280;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.form-group.full-width {
-  grid-column: 1 / -1;
-}
-
-.form-group label {
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 11px 13px;
-
-  border: 1px solid #d1d5db;
-  border-radius: 7px;
-
-  outline: none;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  border-color: #2563eb;
-}
-
-@media (max-width: 768px) {
-  .form-section {
-    margin: 20px 12px;
-    padding: 20px;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .form-group.full-width {
-    grid-column: auto;
-  }
-}
-
-.required-mark {
-  color: #dc2626;
-}
-
-.field-example {
-  color: #6b7280;
-  font-size: 12px;
-}
-
-.field-error {
-  color: #dc2626;
-  font-size: 12px;
-}
-
-.input-error {
-  border-color: #dc2626 !important;
-}
-
-.section-content {
-  width: 100%;
-}
-
-.app-header {
-  background: #0f3d73;
-  color: white;
-  padding: 30px 20px;
-}
-
-.app-header-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.app-header h1 {
-  margin: 0 0 6px;
-  font-size: 28px;
-}
-
-.app-header p {
-  margin: 0;
-  opacity: 0.85;
-}
-.radio-question {
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 12px;
-}
-
-.radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.radio-row {
-  display: grid;
-  grid-template-columns: 20px 1fr;
-  align-items: start;
-  column-gap: 8px;
-  width: 100%;
-}
-
-.radio-row input[type="radio"] {
-  width: 16px;
-  height: 16px;
-  margin: 4px 0 0 0;
-  padding: 0;
-  cursor: pointer;
-}
-
-.radio-text {
-  font-weight: 400 !important;
-  font-size: 14px;
-  line-height: 1.6;
-  cursor: pointer;
-  margin: 0;
-}
-
-.education-subsection {
-  padding: 25px 0;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.education-subsection:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.education-subsection h3 {
-  margin: 0 0 5px;
-  font-size: 20px;
-  color: #0f3d73;
-}
-
-.education-subtitle {
-  margin-bottom: 20px;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.education-description {
-  margin-bottom: 25px;
-  padding: 15px 18px;
-  background: #f8fafc;
-  border-left: 4px solid #0f3d73;
-  border-radius: 6px;
-  line-height: 1.7;
-  font-size: 14px;
-}
-
-.declaration-box {
-  width: 100%;
-}
-
-.declaration-text {
-  padding: 20px;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  line-height: 1.8;
-  font-size: 14px;
-}
-
-.declaration-text p {
-  margin-bottom: 16px;
-}
-
-.declaration-text p:last-child {
-  margin-bottom: 0;
-}
-
-.declaration-divider {
-  height: 1px;
-  background: #d1d5db;
-  margin: 20px 0;
-}
-
-.declaration-checkbox {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-top: 20px;
-  padding: 18px;
-  background: #f0f7ff;
-  border: 1px solid #bfdbfe;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.declaration-checkbox input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  margin-top: 3px;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-
-.declaration-checkbox span {
-  font-size: 14px;
-  line-height: 1.7;
-  font-weight: 600;
-}
-
-
-.footer-container {
-  margin-top: 30px;
-}
-
-.footer {
-  text-align: center;
-
-  padding: 30px 20px;
-
-  color: var(--text-light);
-
-  font-size: 14px;
-
-  line-height: 1.7;
-}
-
-.footer p {
-  margin: 4px 0;
-}
-
-.footer-title {
-  color: var(--primary);
-
-  font-size: 15px;
-
-  font-weight: 700;
-}
-
-.footer-system {
-  margin-top: 12px !important;
-
-  color: var(--text);
-
-  font-size: 14px;
-}
-
-.footer-system strong {
-  color: var(--primary);
-}
-
-.footer-version {
-  font-size: 12px;
-
-  color: var(--text-light);
-}
-
-.footer-copyright {
-  font-size: 12px;
-
-  color: var(--text-light);
-
-  margin-top: 8px !important;
-}
-
-.footer-divider {
-  width: 80px;
-
-  height: 2px;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--primary),
-      var(--secondary)
-    );
-
-  margin: 18px auto;
-}
-
-
-.btn {
-  display: inline-flex;
-
-  align-items: center;
-  justify-content: center;
-
-  padding: 14px 28px;
-
-  border: none;
-  border-radius: 10px;
-
-  background: linear-gradient(
-    135deg,
-    var(--primary),
-    var(--secondary)
-  );
-
-  color: white;
-
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    opacity 0.3s ease;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 8px 20px rgba(15, 76, 129, 0.2);
-}
-
-.btn:active {
-  transform: translateY(0);
-}
-
-.btn:disabled {
-  background: #aab7c4;
-
-  color: white;
-
-  cursor: not-allowed;
-
-  transform: none;
-
-  box-shadow: none;
-
-  opacity: 0.8;
-}
-
-
-.footer-contact {
-  margin-top: 20px;
-}
-
-.footer-contact-title {
-  color: var(--primary);
-
-  font-size: 15px;
-
-  font-weight: 700;
-
-  margin-bottom: 10px !important;
-}
-
-.footer-contact-list {
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  gap: 5px;
-}
-
-.footer-contact-list p {
-  margin: 0;
-}
-
-.footer-contact-list strong {
-  color: var(--text);
-}
-
-.footer-contact-list a {
-  color: var(--primary);
-
-  text-decoration: none;
-
-  font-weight: 500;
-
-  transition: color 0.3s ease;
-}
-
-.footer-contact-list a:hover {
-  color: var(--secondary);
-
-  text-decoration: underline;
-}
-
-.footer-copyright {
-  font-size: 12px;
-
-  color: var(--text-light);
-
-  margin-top: 8px !important;
-} */
-
-
 /* =========================================================
    ROOT VARIABLES
 ========================================================= */
@@ -508,7 +40,7 @@ html {
 
 body {
   margin: 0;
-  padding : 5px;
+  padding: 5px;
 
   font-family:
     Arial,
@@ -699,7 +231,7 @@ img {
 
 
 /* =========================================================
-   FORM SECTION
+   FORM SECTION / CARD
 ========================================================= */
 
 .form-section {
@@ -857,7 +389,9 @@ img {
 }
 
 
-/* Labels */
+/* =========================================================
+   LABELS
+========================================================= */
 
 .form-group > label,
 .radio-question {
@@ -1103,6 +637,204 @@ img {
 
 
 /* =========================================================
+   ICT EDUCATION & PROFESSIONAL QUALIFICATIONS
+========================================================= */
+
+.qualification-subsection {
+  width: 100%;
+
+  margin-top: 32px;
+}
+
+.qualification-subsection:first-of-type {
+  margin-top: 0;
+}
+
+
+/* Section subtitle */
+
+.section-subtitle {
+  margin: 0 0 16px 0;
+
+  color: var(--primary);
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   SPECIALIZED FIELDS TABLE
+========================================================= */
+
+.specialized-fields-table {
+  width: 100%;
+
+  margin-top: 16px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+}
+
+
+/* ---------------------------------------------------------
+   HEADER
+--------------------------------------------------------- */
+
+.specialized-header {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr) 280px;
+
+  background: #f3f6f9;
+
+  border-bottom: 1px solid var(--border);
+
+  font-weight: 600;
+
+  color: #243b53;
+}
+
+.specialized-header > div {
+  padding: 14px 16px;
+
+  min-width: 0;
+}
+
+.specialized-header > div:last-child {
+  text-align: center;
+
+  border-left: 1px solid var(--border);
+}
+
+
+/* ---------------------------------------------------------
+   ROW
+--------------------------------------------------------- */
+
+.specialized-row {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr) 280px;
+
+  min-height: 58px;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.specialized-row:last-child {
+  border-bottom: none;
+}
+
+
+/* ---------------------------------------------------------
+   FIELD NAME
+--------------------------------------------------------- */
+
+.specialized-field-name {
+  display: flex;
+
+  align-items: center;
+
+  min-width: 0;
+
+  padding: 12px 16px;
+
+  color: var(--text);
+
+  font-size: 14px;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* ---------------------------------------------------------
+   RATING AREA
+--------------------------------------------------------- */
+
+.specialized-rating {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 22px;
+
+  padding: 10px 16px;
+
+  border-left: 1px solid #e5e7eb;
+}
+
+
+/* ---------------------------------------------------------
+   RATING OPTION
+--------------------------------------------------------- */
+
+.rating-option {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  color: var(--text);
+
+  user-select: none;
+}
+
+.rating-option input[type="radio"] {
+  width: 17px;
+  height: 17px;
+
+  margin: 0;
+
+  cursor: pointer;
+
+  accent-color: var(--primary);
+}
+
+.rating-option span {
+  min-width: 14px;
+
+  text-align: center;
+
+  font-weight: 500;
+}
+
+
+/* ---------------------------------------------------------
+   HOVER EFFECT
+--------------------------------------------------------- */
+
+.specialized-row:hover {
+  background: #f8fafc;
+}
+
+.rating-option:hover {
+  color: var(--primary);
+}
+
+
+/* =========================================================
    DECLARATION
 ========================================================= */
 
@@ -1147,7 +879,9 @@ img {
 }
 
 
-/* Checkbox */
+/* =========================================================
+   DECLARATION CHECKBOX
+========================================================= */
 
 .declaration-checkbox {
   display: flex;
@@ -1196,11 +930,12 @@ img {
 ========================================================= */
 
 .submit-area {
-  padding-left: 20px;
-  padding-right: 20px;
   width: 100%;
 
   margin: 30px 0;
+
+  padding-left: 20px;
+  padding-right: 20px;
 
   display: flex;
 
@@ -1213,8 +948,10 @@ img {
   display: inline-flex;
 
   align-items: center;
-  width: 50%;
+
   justify-content: center;
+
+  width: 50%;
 
   padding: 14px 28px;
 
@@ -1401,8 +1138,7 @@ img {
 
   font-weight: 500;
 
-  transition:
-    color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .footer-contact-list a:hover {
@@ -1440,6 +1176,11 @@ img {
     font-size: 0.95rem;
   }
 
+  /*
+    Two-column form fields become
+    one column on tablet/mobile.
+  */
+
   .form-grid {
     grid-template-columns: 1fr;
   }
@@ -1454,6 +1195,69 @@ img {
    MOBILE
 ========================================================= */
 
+@media (max-width: 768px) {
+
+  /* -------------------------------------------------------
+     SECTION
+  ------------------------------------------------------- */
+
+  .section-header {
+    padding: 18px;
+
+    gap: 12px;
+  }
+
+  .section-content {
+    padding: 22px 18px;
+  }
+
+
+  /* -------------------------------------------------------
+     SPECIALIZED TABLE
+  ------------------------------------------------------- */
+
+  .specialized-header,
+  .specialized-row {
+    grid-template-columns: 1fr;
+  }
+
+  .specialized-header > div:last-child {
+    display: none;
+  }
+
+  .specialized-field-name {
+    padding-bottom: 4px;
+
+    font-weight: 500;
+  }
+
+  .specialized-rating {
+    justify-content: flex-start;
+
+    padding: 8px 16px 14px;
+
+    border-left: none;
+  }
+
+
+  /* -------------------------------------------------------
+     QUALIFICATION SECTIONS
+  ------------------------------------------------------- */
+
+  .qualification-subsection {
+    margin-top: 28px;
+  }
+
+  .section-subtitle {
+    font-size: 16px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE - 650px
+========================================================= */
+
 @media (max-width: 650px) {
 
   .page {
@@ -1463,7 +1267,9 @@ img {
   }
 
 
-  /* Header */
+  /* -------------------------------------------------------
+     HEADER
+  ------------------------------------------------------- */
 
   .app-header {
     padding: 28px 18px;
@@ -1507,7 +1313,9 @@ img {
   }
 
 
-  /* Form */
+  /* -------------------------------------------------------
+     FORM
+  ------------------------------------------------------- */
 
   .form-section {
     margin-bottom: 18px;
@@ -1515,371 +1323,180 @@ img {
     border-radius: 14px;
   }
 
+
+  /* -------------------------------------------------------
+     SECTION HEADER
+  ------------------------------------------------------- */
+
   .section-header {
     padding: 18px;
 
     gap: 12px;
-  }}
-
-  /* =========================================================
-   SPECIALIZED FIELDS TABLE
-========================================================= */
-
-.specialized-fields-table {
-  width: 100%;
-  margin-top: 16px;
-  border: 1px solid #d9e2ec;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #ffffff;
-}
-
-/* ---------------------------------------------------------
-   HEADER
---------------------------------------------------------- */
-
-.specialized-header {
-  display: grid;
-  grid-template-columns: 1fr 280px;
-
-  background: #f3f6f9;
-  border-bottom: 1px solid #d9e2ec;
-
-  font-weight: 600;
-  color: #243b53;
-}
-
-.specialized-header > div {
-  padding: 14px 16px;
-}
-
-.specialized-header > div:last-child {
-  text-align: center;
-  border-left: 1px solid #d9e2ec;
-}
-
-/* ---------------------------------------------------------
-   ROW
---------------------------------------------------------- */
-
-.specialized-row {
-  display: grid;
-  grid-template-columns: 1fr 280px;
-
-  min-height: 58px;
-
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.specialized-row:last-child {
-  border-bottom: none;
-}
-
-/* ---------------------------------------------------------
-   FIELD NAME
---------------------------------------------------------- */
-
-.specialized-field-name {
-  display: flex;
-  align-items: center;
-
-  padding: 12px 16px;
-
-  color: #263238;
-  font-size: 14px;
-}
-
-/* ---------------------------------------------------------
-   RATING AREA
---------------------------------------------------------- */
-
-.specialized-rating {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-
-  padding: 10px 16px;
-
-  border-left: 1px solid #e5e7eb;
-}
-
-/* ---------------------------------------------------------
-   RATING OPTION
---------------------------------------------------------- */
-
-.rating-option {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 6px;
-
-  cursor: pointer;
-
-  font-size: 14px;
-  color: #263238;
-
-  user-select: none;
-}
-
-.rating-option input[type="radio"] {
-  width: 17px;
-  height: 17px;
-
-  margin: 0;
-
-  cursor: pointer;
-
-  accent-color: #0f4c81;
-}
-
-.rating-option span {
-  min-width: 14px;
-
-  text-align: center;
-
-  font-weight: 500;
-}
-
-/* ---------------------------------------------------------
-   HOVER EFFECT
---------------------------------------------------------- */
-
-.specialized-row:hover {
-  background: #f8fafc;
-}
-
-.rating-option:hover {
-  color: #0f4c81;
-}
-
-/* ---------------------------------------------------------
-   MOBILE
---------------------------------------------------------- */
-
-@media (max-width: 768px) {
-
-  .specialized-header,
-  .specialized-row {
-    grid-template-columns: 1fr;
   }
 
-  .specialized-header > div:last-child {
-    display: none;
+  .section-number {
+    width: 42px;
+    min-width: 42px;
+
+    height: 42px;
+    min-height: 42px;
+
+    flex-basis: 42px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+  }
+
+  .section-header h2 {
+    font-size: 17px;
+
+    line-height: 1.45;
+  }
+
+  .section-header p {
+    font-size: 13px;
+
+    line-height: 1.5;
+  }
+
+
+  /* -------------------------------------------------------
+     SECTION CONTENT
+  ------------------------------------------------------- */
+
+  .section-content {
+    padding: 20px 16px;
+  }
+
+
+  /* -------------------------------------------------------
+     FORM GRID
+  ------------------------------------------------------- */
+
+  .form-grid {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+
+  /* -------------------------------------------------------
+     INPUTS
+  ------------------------------------------------------- */
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px 13px;
+
+    font-size: 14px;
+  }
+
+
+  /* -------------------------------------------------------
+     SPECIALIZED TABLE
+  ------------------------------------------------------- */
+
+  .specialized-fields-table {
+    margin-top: 12px;
+
+    border-radius: 7px;
   }
 
   .specialized-field-name {
-    padding-bottom: 4px;
+    padding: 11px 13px;
 
-    font-weight: 500;
+    font-size: 13px;
   }
 
   .specialized-rating {
-    justify-content: flex-start;
+    gap: 16px;
 
-    padding: 8px 16px 14px;
-
-    border-left: none;
+    padding: 8px 13px 13px;
   }
 
-}
+  .rating-option {
+    font-size: 13px;
 
- /* =========================================================
-    ICT QUALIFICATION SECTIONS
- ========================================================= */
-
-.form-section {
-  margin-top: 28px;
-}
-
-.form-section:first-child {
-  margin-top: 0;
-}
-
-/* ---------------------------------------------------------
-   SECTION SUBTITLE
---------------------------------------------------------- */
-
-.section-subtitle {
-  margin: 0 0 16px 0;
-
-  font-size: 17px;
-  font-weight: 600;
-
-  color: #0f4c81;
-
-  line-height: 1.5;
-}
-
-/* ---------------------------------------------------------
-   PROFESSIONAL / TECHNOLOGY / AWARDS FIELD CONTAINER
---------------------------------------------------------- */
-
-.form-section .form-group {
-  margin-bottom: 0;
-}
-
-.form-section .form-group + .form-group {
-  margin-top: 16px;
-}
-
-/* ---------------------------------------------------------
-   FULL WIDTH INPUTS
---------------------------------------------------------- */
-
-.form-section .full-width {
-  width: 100%;
-}
-
-/* ---------------------------------------------------------
-   TEXTAREA-LIKE LONG INPUTS
---------------------------------------------------------- */
-
-.form-section input[type="text"],
-.form-section input[type="number"] {
-  width: 100%;
-}
-
-/* =========================================================
-   RESEARCH PAPERS
-========================================================= */
-
-.research-paper-section {
-  margin-top: 28px;
-
-  padding: 20px;
-
-  background: #f8fafc;
-
-  border: 1px solid #d9e2ec;
-  border-radius: 8px;
-}
-
-.research-paper-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 18px 20px;
-}
-
-/* ---------------------------------------------------------
-   RESEARCH TOPIC
---------------------------------------------------------- */
-
-.research-paper-topic {
-  grid-column: 1 / -1;
-}
-
-/* ---------------------------------------------------------
-   RESEARCH INSTITUTE / MAGAZINE
---------------------------------------------------------- */
-
-.research-paper-institute {
-  grid-column: 1 / -1;
-}
-
-/* ---------------------------------------------------------
-   RESEARCH TYPE
---------------------------------------------------------- */
-
-.research-paper-type {
-  width: 100%;
-}
-
-/* =========================================================
-   PROFESSIONAL MEMBERSHIPS
-========================================================= */
-
-.professional-membership-section {
-  padding: 18px 20px;
-
-  background: #ffffff;
-
-  border: 1px solid #d9e2ec;
-  border-radius: 8px;
-}
-
-/* =========================================================
-   PROFESSIONAL QUALIFICATIONS
-========================================================= */
-
-.professional-qualification-section {
-  padding: 18px 20px;
-
-  background: #ffffff;
-
-  border: 1px solid #d9e2ec;
-  border-radius: 8px;
-}
-
-/* =========================================================
-   TECHNOLOGY SKILLS
-========================================================= */
-
-.technology-skills-section {
-  padding: 18px 20px;
-
-  background: #ffffff;
-
-  border: 1px solid #d9e2ec;
-  border-radius: 8px;
-}
-
-/* =========================================================
-   AWARDS
-========================================================= */
-
-.awards-section {
-  padding: 18px 20px;
-
-  background: #ffffff;
-
-  border: 1px solid #d9e2ec;
-  border-radius: 8px;
-}
-
-/* =========================================================
-   SECTION DESCRIPTION / HELP TEXT
-========================================================= */
-
-.form-section-description {
-  margin: -6px 0 16px 0;
-
-  font-size: 13px;
-
-  line-height: 1.6;
-
-  color: #607d8b;
-}
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 768px) {
-
-  .research-paper-grid {
-    grid-template-columns: 1fr;
+    gap: 4px;
   }
 
-  .research-paper-topic,
-  .research-paper-institute {
-    grid-column: auto;
+  .rating-option input[type="radio"] {
+    width: 16px;
+    height: 16px;
   }
 
-  .professional-membership-section,
-  .professional-qualification-section,
-  .technology-skills-section,
-  .awards-section,
-  .research-paper-section {
-    padding: 16px;
+
+  /* -------------------------------------------------------
+     QUALIFICATION SECTIONS
+  ------------------------------------------------------- */
+
+  .qualification-subsection {
+    margin-top: 26px;
   }
 
   .section-subtitle {
+    margin-bottom: 13px;
+
+    font-size: 16px;
+
+    line-height: 1.5;
+  }
+
+
+  /* -------------------------------------------------------
+     DECLARATION
+  ------------------------------------------------------- */
+
+  .declaration-text {
+    padding: 17px;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+  }
+
+  .declaration-checkbox {
+    padding: 15px;
+
+    gap: 10px;
+  }
+
+  .declaration-checkbox span {
+    font-size: 13px;
+
+    line-height: 1.6;
+  }
+
+
+  /* -------------------------------------------------------
+     SUBMIT BUTTON
+  ------------------------------------------------------- */
+
+  .submit-area {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    margin: 25px 0;
+  }
+
+  .submit-area .btn {
+    width: 100%;
+
+    padding: 15px 20px;
+
     font-size: 16px;
   }
 
+
+  /* -------------------------------------------------------
+     FOOTER
+  ------------------------------------------------------- */
+
+  .footer {
+    padding: 25px 15px;
+
+    font-size: 13px;
+  }
 }

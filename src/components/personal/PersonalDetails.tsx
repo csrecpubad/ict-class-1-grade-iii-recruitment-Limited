@@ -191,7 +191,7 @@ export default function PersonalDetails({
 
         {/* Name with initials - Sinhala/Tamil */}
         <TextField
-          label="Name with Initials (Sinhala / Tamil) / මුලකුරු සමග නම / ஆரம்ப எழுத்துக்களுடன் பெயர்"
+          label="Name with Initials / මුලකුරු සමග නම / ஆரம்ப எழுத்துக்களுடன் பெயர்  (Sinhala / Tamil)"
           name="nameSinhala"
           value={data.nameSinhala}
           onChange={(value) => onChange("nameSinhala", value)}
@@ -215,7 +215,7 @@ export default function PersonalDetails({
 
         {/* Full name - Sinhala/Tamil */}
         <TextField
-          label="Full Name (Sinhala/Tamil) / සම්පූර්ණ නම / முழு பெயர்"
+          label="Full Name / සම්පූර්ණ නම / முழு பெயர் (Sinhala/Tamil) "
           name="fullNameSinhala"
           value={data.fullNameSinhala}
           onChange={(value) => onChange("fullNameSinhala", value)}
