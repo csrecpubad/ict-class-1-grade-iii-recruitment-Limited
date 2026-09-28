@@ -24,7 +24,7 @@ export default function ICTEmploymentDetails({
 
   return (
     <SectionCard title="Employment Information"
-    number = "3"
+    number = "03"
     description="Please enter your employment information"
     >
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -63,7 +63,7 @@ export default function ICTEmploymentDetails({
           label="Current Service Releated Position / දැනට ඔබ දරන තනතුර"
           name="currentPosition"
           value={""}
-          onChange={(value) => updateField("currentPosition", value)}
+          onChange={(value) => updateField("workplace", value)}
           placeholder="2 II or 2 I"
           error={""}
         />
