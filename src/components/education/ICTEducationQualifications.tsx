@@ -15,11 +15,14 @@ import { specializedFieldExamples } from "../../constants/ictFields";
 interface ICTEducationQualificationsProps {
   value: EducationQualifications;
   onChange: (value: EducationQualifications) => void;
+
+  errors?: Record<string, string>;
 }
 
 export default function ICTEducationQualifications({
   value,
   onChange,
+  errors = {},
 }: ICTEducationQualificationsProps) {
   /* =====================================================
      GENERAL UPDATE
@@ -93,6 +96,7 @@ export default function ICTEducationQualifications({
           ]}
           placeholder="Select"
           required
+          error={errors.alPassed}
         />
 
         <TextField
@@ -102,6 +106,7 @@ export default function ICTEducationQualifications({
           onChange={(text) => updateField("alStream", text)}
           placeholder="Enter A/L stream"
           required
+          error={errors.alStream}
         />
 
         <TextField
@@ -111,7 +116,7 @@ export default function ICTEducationQualifications({
           onChange={(value) => updateField("alSub1", value)}
           placeholder="Subject Name - Result"
           required
-          // error={alErrors.alSub1}
+          error={errors.alsub1}
         />
 
         <TextField
@@ -121,7 +126,7 @@ export default function ICTEducationQualifications({
           onChange={(value) => updateField("alSub2", value)}
           placeholder="Subject Name - Result"
           required
-          // error={alErrors.alSub2}
+          error={errors.alSub2}
         />
 
         <TextField
@@ -131,7 +136,7 @@ export default function ICTEducationQualifications({
           onChange={(value) => updateField("alSub3", value)}
           placeholder="Subject Name - Result"
           required
-          // error={alErrors.alSub3}
+          error={errors.alSub3}
         />
 
         <TextField
@@ -141,6 +146,7 @@ export default function ICTEducationQualifications({
           onChange={(text) => updateField("qualification", text)}
           placeholder="Full BSc. in ICT (3 years)"
           required
+          error={errors.qualification}
         />
 
         <TextField
@@ -150,6 +156,7 @@ export default function ICTEducationQualifications({
           onChange={(text) => updateField("university", text)}
           placeholder="University Name"
           required
+          error={errors.university}
         />
 
         <TextField
@@ -159,6 +166,7 @@ export default function ICTEducationQualifications({
           onChange={(text) => updateField("specialization", text)}
           placeholder="Specialization Name"
           required
+          error={errors.specialization}
         />
 
         <TextField
@@ -168,6 +176,7 @@ export default function ICTEducationQualifications({
           onChange={(text) => updateField("degreeEffectiveDate", text)}
           placeholder="YYYY-MM-DD"
           required
+          error={errors.degreeEffectiveDate}
         />
 
         <TextField
@@ -176,6 +185,7 @@ export default function ICTEducationQualifications({
           value={value.postGraduateQualification}
           onChange={(text) => updateField("postGraduateQualification", text)}
           placeholder="Enter Post Graduate Qualification"
+          error={errors.postGraduateQualification}
         />
 
         <TextField
@@ -184,6 +194,7 @@ export default function ICTEducationQualifications({
           value={value.postGraduateUniversity}
           onChange={(text) => updateField("postGraduateUniversity", text)}
           placeholder="Enter University / Institute / College Name"
+          error={errors.postGraduateUniversity}
         />
 
         <TextField
@@ -192,6 +203,7 @@ export default function ICTEducationQualifications({
           value={value.postGraduateSpecialization}
           onChange={(text) => updateField("postGraduateSpecialization", text)}
           placeholder="Enter Specialization / Major"
+          error={errors.postGraduateSpecialization}
         />
 
         <TextField
@@ -200,6 +212,7 @@ export default function ICTEducationQualifications({
           value={value.postGraduateEffectiveDate}
           onChange={(text) => updateField("postGraduateEffectiveDate", text)}
           placeholder="YYYY-MM-DD"
+          error={errors.postGraduateEffectiveDate}
         />
       </div>
       <br />
@@ -244,6 +257,7 @@ export default function ICTEducationQualifications({
                       value="Yes"
                       checked={field.academicCompleted === "Yes"}
                       onChange={() => updateAcademicStatus(index, "Yes")}
+                      required
                     />
 
                     <span>Yes</span>
@@ -256,6 +270,7 @@ export default function ICTEducationQualifications({
                       value="No"
                       checked={field.academicCompleted === "No"}
                       onChange={() => updateAcademicStatus(index, "No")}
+                      required
                     />
 
                     <span>No</span>
@@ -312,6 +327,7 @@ export default function ICTEducationQualifications({
                         value={rating}
                         checked={field.experienceRating === rating}
                         onChange={() => updateExperienceRating(index, rating)}
+                        required
                       />
 
                       <span>{rating}</span>
@@ -339,6 +355,8 @@ export default function ICTEducationQualifications({
           onChange={(text) => updateField("professionalMemberships", text)}
           placeholder="Enter professional memberships"
           fullWidth
+          required
+          error={errors.professionalMemberships}
         />
       </div>
 
@@ -355,6 +373,8 @@ export default function ICTEducationQualifications({
           value={value.professionalQualifications}
           onChange={(text) => updateField("professionalQualifications", text)}
           placeholder="Enter professional qualifications"
+          required
+          error={errors.professionalQualifications}
         />
 
         <TextField
@@ -386,6 +406,8 @@ export default function ICTEducationQualifications({
           onChange={(text) => updateField("technologySkills", text)}
           placeholder="Enter programming languages, frameworks and technologies"
           fullWidth
+          required
+          error={errors.technologySkills}
         />
       </div>
 

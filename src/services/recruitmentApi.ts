@@ -1,48 +1,49 @@
 import { API_URL } from "../config/api";
-
-export interface SubmitApplicationResponse {
+export interface SubmissionResponse {
   success: boolean;
   message: string;
 }
 
 export async function submitApplication(
   data: Record<string, string>
-): Promise<SubmitApplicationResponse> {
+): Promise<SubmissionResponse> {
   try {
-    const formData = new URLSearchParams();
-
-    Object.entries(data).forEach(
-      ([key, value]) => {
-        formData.append(key, value);
-      }
-    );
-
     const response = await fetch(API_URL, {
       method: "POST",
 
       headers: {
-        "Content-Type":
-          "application/x-www-form-urlencoded;charset=UTF-8",
+        "Content-Type": "text/plain;charset=utf-8",
       },
 
-      body: formData.toString(),
+      body: JSON.stringify(data),
     });
 
-    const result: SubmitApplicationResponse =
-      await response.json();
+    const result = await response.json();
 
-    return result;
+    console.log("Server response:", result);
 
+    if (!result.success) {
+      return {
+        success: false,
+        message:
+          result.message ||
+          "Application submission failed.",
+      };
+    }
+
+    return {
+      success: true,
+      message:
+        result.message ||
+        "Application submitted successfully.",
+    };
   } catch (error) {
-    console.error(
-      "Application submission error:",
-      error
-    );
+    console.error("Application submission error:", error);
 
     return {
       success: false,
       message:
-        "Unable to connect to the application server.",
+        "Unable to connect to the application server. Please try again.",
     };
   }
 }

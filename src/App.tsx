@@ -14,20 +14,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 import GeneralDetails from "./components/general/GeneralDetails";
 
-import {
-  validateForm,
-  type FormErrors,
-} from "./utils/validation";
+import { validateForm, type FormErrors } from "./utils/validation";
 
 import type {
   GeneralDetails as GeneralDetailsType,
   PersonalDetails as PersonalDetailsType,
 } from "./types/recruitment";
 
-import type {
-  EmploymentDetails,
-  EducationQualifications,
-} from "./types/ict";
+import type { EmploymentDetails, EducationQualifications } from "./types/ict";
 
 import Footer from "./components/fotter/Fotter";
 import Header from "./components/header/Header";
@@ -37,8 +31,7 @@ function App() {
      DECLARATION
   ===================================================== */
 
-  const [declarationAccepted, setDeclarationAccepted] =
-    useState(false);
+  const [declarationAccepted, setDeclarationAccepted] = useState(false);
 
   /* =====================================================
      VALIDATION ERRORS
@@ -50,103 +43,96 @@ function App() {
      GENERAL DETAILS
   ===================================================== */
 
-  const [generalDetails, setGeneralDetails] =
-    useState<GeneralDetailsType>({
-      callingNumber: "",
-      email: "",
-    });
+  const [generalDetails, setGeneralDetails] = useState<GeneralDetailsType>({
+    callingNumber: "",
+    email: "",
+  });
 
   /* =====================================================
      PERSONAL DETAILS
   ===================================================== */
 
-  const [personalDetails, setPersonalDetails] =
-    useState<PersonalDetailsType>({
-      nameSinhala: "",
-      nameEnglish: "",
+  const [personalDetails, setPersonalDetails] = useState<PersonalDetailsType>({
+    nameSinhala: "",
+    nameEnglish: "",
 
-      prefix: "",
+    prefix: "",
 
-      fullNameSinhala: "",
-      fullNameEnglish: "",
+    fullNameSinhala: "",
+    fullNameEnglish: "",
 
-      nic: "",
+    nic: "",
 
-      gender: "",
-      civilStatus: "",
+    gender: "",
+    civilStatus: "",
 
-      permanentAddress: "",
-      appointmentAddress: "",
+    permanentAddress: "",
+    appointmentAddress: "",
 
-      residentialDistrict: "",
+    residentialDistrict: "",
 
-      mobile: "",
-      whatsapp: "",
+    mobile: "",
+    whatsapp: "",
 
-      birthday: "",
-      age: "",
+    birthday: "",
+    age: "",
 
-      currentPosition: "",
-      workPlace: "",
-    });
+    currentPosition: "",
+    workPlace: "",
+  });
 
   /* =====================================================
      ICT EMPLOYMENT DETAILS
   ===================================================== */
 
-  const [employmentDetails, setEmploymentDetails] =
-    useState<EmploymentDetails>({
-      isPublicSectorEmployee: "",
-      serviceParticulars: "",
-      workplace: "",
-    });
+const [employmentDetails, setEmploymentDetails] =
+  useState<EmploymentDetails>({
+    currentPosition: "",
+    workplace: "",
+  });
 
   /* =====================================================
      ICT EDUCATION QUALIFICATIONS
   ===================================================== */
 
-const [
-  educationQualifications,
-  setEducationQualifications,
-] =
-  useState<EducationQualifications>({
-    alPassed: "",
-    alStream: "",
-    alSub1: "",
-    alSub2: "",
-    alSub3: "",
-    qualification: "",
-    university: "",
-    specialization: "",
-    degreeEffectiveDate: "",
-    postGraduateQualification: "",
-    postGraduateUniversity: "",
-    postGraduateSpecialization: "",
-    postGraduateEffectiveDate: "",
-    specializedFields:
-      specializedFields.map((field) => ({
+  const [educationQualifications, setEducationQualifications] =
+    useState<EducationQualifications>({
+      alPassed: "",
+      alStream: "",
+      alSub1: "",
+      alSub2: "",
+      alSub3: "",
+      qualification: "",
+      university: "",
+      specialization: "",
+      degreeEffectiveDate: "",
+      postGraduateQualification: "",
+      postGraduateUniversity: "",
+      postGraduateSpecialization: "",
+      postGraduateEffectiveDate: "",
+      specializedFields: specializedFields.map((field) => ({
         field,
         academicCompleted: "",
         experienceRating: null,
       })),
 
-    professionalMemberships: "",
+      professionalMemberships: "",
 
-    professionalQualifications: "",
+      professionalQualifications: "",
 
-    professionalQualificationsOther: "",
+      professionalQualificationsOther: "",
 
-    technologySkills: "",
+      technologySkills: "",
 
-    researchPaper: {
-      topic: "",
-      year: "",
-      type: "",
-      instituteOrMagazine: "",
-    },
+      researchPaper: {
+        topic: "",
+        year: "",
+        type: "",
+        instituteOrMagazine: "",
+      },
 
-    awards: "",
-  });
+      awards: "",
+    });
 
   /* =====================================================
      GENERAL DETAILS CHANGE
@@ -154,7 +140,7 @@ const [
 
   const handleGeneralChange = (
     field: keyof GeneralDetailsType,
-    value: string
+    value: string,
   ) => {
     setGeneralDetails((previous) => ({
       ...previous,
@@ -176,7 +162,7 @@ const [
 
   const handlePersonalChange = (
     field: keyof PersonalDetailsType,
-    value: string
+    value: string,
   ) => {
     setPersonalDetails((previous) => ({
       ...previous,
@@ -196,9 +182,7 @@ const [
      DECLARATION CHANGE
   ===================================================== */
 
-  const handleDeclarationChange = (
-    accepted: boolean
-  ) => {
+  const handleDeclarationChange = (accepted: boolean) => {
     setDeclarationAccepted(accepted);
 
     if (accepted) {
@@ -216,9 +200,7 @@ const [
      SUBMIT
   ===================================================== */
 
-  const handleSubmit = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const validationErrors = validateForm({
@@ -236,20 +218,13 @@ const [
     ------------------------------------------------ */
 
     if (Object.keys(validationErrors).length > 0) {
-      toast.error(
-        "Please check the highlighted fields and complete the form."
-      );
+      toast.error("Please check the highlighted fields and complete the form.");
 
-      const firstErrorKey =
-        Object.keys(validationErrors)[0];
+      const firstErrorKey = Object.keys(validationErrors)[0];
 
-      const sectionKey =
-        firstErrorKey.split(".")[0];
+      const sectionKey = firstErrorKey.split(".")[0];
 
-      const element =
-        document.querySelector(
-          `[data-section="${sectionKey}"]`
-        );
+      const element = document.querySelector(`[data-section="${sectionKey}"]`);
 
       if (element) {
         element.scrollIntoView({
@@ -266,120 +241,205 @@ const [
     ------------------------------------------------ */
 
     const submissionData: Record<string, string> = {
-      callingNumber:
-        generalDetails.callingNumber,
+  // =========================
+  // GENERAL INFORMATION
+  // =========================
 
-      email:
-        generalDetails.email,
+  callingNumber:
+    generalDetails.callingNumber,
 
-      nameSinhala:
-        personalDetails.nameSinhala,
+  email:
+    generalDetails.email,
 
-      nameEnglish:
-        personalDetails.nameEnglish,
+  // =========================
+  // PERSONAL INFORMATION
+  // =========================
 
-      prefix:
-        personalDetails.prefix,
+  nameEnglish:
+    personalDetails.nameEnglish,
 
-      fullNameSinhala:
-        personalDetails.fullNameSinhala,
+  nameSinhala:
+    personalDetails.nameSinhala,
 
-      fullNameEnglish:
-        personalDetails.fullNameEnglish,
+  prefix:
+    personalDetails.prefix,
 
-      nic:
-        personalDetails.nic,
+  fullNameEnglish:
+    personalDetails.fullNameEnglish,
 
-      gender:
-        personalDetails.gender,
+  fullNameSinhala:
+    personalDetails.fullNameSinhala,
 
-      civilStatus:
-        personalDetails.civilStatus,
+  nic:
+    personalDetails.nic,
 
-      permanentAddress:
-        personalDetails.permanentAddress,
+  gender:
+    personalDetails.gender,
 
-      appointmentAddress:
-        personalDetails.appointmentAddress,
+  civilStatus:
+    personalDetails.civilStatus,
 
-      residentialDistrict:
-        personalDetails.residentialDistrict,
+  permanentAddress:
+    personalDetails.permanentAddress,
 
-      mobile:
-        personalDetails.mobile,
+  appointmentAddress:
+    personalDetails.appointmentAddress,
 
-      whatsapp:
-        personalDetails.whatsapp,
+  residentialDistrict:
+    personalDetails.residentialDistrict,
 
-      birthday:
-        personalDetails.birthday,
+  mobile:
+    personalDetails.mobile,
 
-      age:
-        personalDetails.age,
+  whatsapp:
+    personalDetails.whatsapp,
 
-      currentPosition:
-        personalDetails.currentPosition,
+  birthday:
+    personalDetails.birthday,
 
-      workPlace:
-        personalDetails.workPlace,
+  age:
+    personalDetails.age,
 
-      /* ICT EMPLOYMENT */
+  // =========================
+  // EMPLOYMENT INFORMATION
+  // =========================
 
-      isPublicSectorEmployee:
-        employmentDetails.isPublicSectorEmployee,
+  workplace:
+    employmentDetails.workplace,
 
-      serviceParticulars:
-        employmentDetails.serviceParticulars,
+  currentPosition:
+    employmentDetails.currentPosition,
 
-      ictWorkPlace:
-        employmentDetails.workplace,
+  // =========================
+  // GCE A/L
+  // =========================
 
-      /* ICT EDUCATION */
+  alPassed:
+    educationQualifications.alPassed,
 
-      educationQualification:
-        educationQualifications.qualification,
+  alStream:
+    educationQualifications.alStream,
 
-      alPassed:
-        educationQualifications.alPassed,
+  alSub1:
+    educationQualifications.alSub1,
 
-      alStream:
-        educationQualifications.alStream,
+  alSub2:
+    educationQualifications.alSub2,
 
-      /* DECLARATION */
+  alSub3:
+    educationQualifications.alSub3,
 
-      declarationAccepted:
-        declarationAccepted ? "Yes" : "No",
-    };
+  // =========================
+  // DEGREE / MAIN QUALIFICATION
+  // =========================
+
+  educationQualification:
+    educationQualifications.qualification,
+
+  university:
+    educationQualifications.university,
+
+  specialization:
+    educationQualifications.specialization,
+
+  degreeEffectiveDate:
+    educationQualifications.degreeEffectiveDate,
+
+  // =========================
+  // POSTGRADUATE
+  // =========================
+
+  postGraduateQualification:
+    educationQualifications.postGraduateQualification,
+
+  postGraduateUniversity:
+    educationQualifications.postGraduateUniversity,
+
+  postGraduateSpecialization:
+    educationQualifications.postGraduateSpecialization,
+
+  postGraduateEffectiveDate:
+    educationQualifications.postGraduateEffectiveDate,
+
+  // =========================
+  // PROFESSIONAL INFORMATION
+  // =========================
+
+  professionalMemberships:
+    educationQualifications.professionalMemberships,
+
+  professionalQualifications:
+    educationQualifications.professionalQualifications,
+
+  professionalQualificationsOther:
+    educationQualifications.professionalQualificationsOther,
+
+  technologySkills:
+    educationQualifications.technologySkills,
+
+  // =========================
+  // RESEARCH PAPER
+  // =========================
+
+  researchPaperTopic:
+    educationQualifications.researchPaper.topic,
+
+  researchPaperYear:
+    educationQualifications.researchPaper.year,
+
+  researchPaperType:
+    educationQualifications.researchPaper.type,
+
+  researchPaperInstitute:
+    educationQualifications.researchPaper.instituteOrMagazine,
+
+  // =========================
+  // AWARDS
+  // =========================
+
+  awards:
+    educationQualifications.awards,
+
+  // =========================
+  // DECLARATION
+  // =========================
+
+  declarationAccepted:
+    declarationAccepted ? "Yes" : "No",
+};
+
+// =========================
+// SPECIALIZED ICT FIELDS
+// =========================
+
+educationQualifications.specializedFields.forEach(
+  (field) => {
+    submissionData[
+      `${field.field} - Academic`
+    ] = field.academicCompleted;
+
+    submissionData[
+      `${field.field} - Experience Rating`
+    ] =
+      field.experienceRating !== null
+        ? field.experienceRating.toString()
+        : "";
+  }
+);
 
     console.log(
-      "VALID ICT CLASS I GRADE III FORM",
-      {
-        general: generalDetails,
-        personal: personalDetails,
-        employment: employmentDetails,
-        education: educationQualifications,
-        declarationAccepted,
-      }
-    );
+  "FINAL SUBMISSION DATA",
+  submissionData
+);
 
-    toast.info(
-      "Submitting your application..."
-    );
+    toast.info("Submitting your application...");
 
-    const result =
-      await submitApplication(
-        submissionData
-      );
+    const result = await submitApplication(submissionData);
 
     if (result.success) {
-      toast.success(
-        "Application submitted successfully!"
-      );
+      toast.success("Application submitted successfully!");
     } else {
-      toast.error(
-        result.message ||
-          "Application submission failed."
-      );
+      toast.error(result.message || "Application submission failed.");
     }
   };
 
@@ -387,29 +447,30 @@ const [
      ERROR GROUPS
   ===================================================== */
 
-  const generalErrors =
-    Object.fromEntries(
-      Object.entries(errors)
-        .filter(([key]) =>
-          key.startsWith("general.")
-        )
-        .map(([key, message]) => [
-          key.replace("general.", ""),
-          message,
-        ])
-    );
+  const generalErrors = Object.fromEntries(
+    Object.entries(errors)
+      .filter(([key]) => key.startsWith("general."))
+      .map(([key, message]) => [key.replace("general.", ""), message]),
+  );
 
-  const personalErrors =
-    Object.fromEntries(
-      Object.entries(errors)
-        .filter(([key]) =>
-          key.startsWith("personal.")
-        )
-        .map(([key, message]) => [
-          key.replace("personal.", ""),
-          message,
-        ])
-    );
+  const personalErrors = Object.fromEntries(
+    Object.entries(errors)
+      .filter(([key]) => key.startsWith("personal."))
+      .map(([key, message]) => [key.replace("personal.", ""), message]),
+  );
+
+  const educationErrors = Object.fromEntries(
+    Object.entries(errors)
+      .filter(([key]) => key.startsWith("education."))
+      .map(([key, message]) => [key.replace("education.", ""), message]),
+  );
+
+  const employmentErrors = Object.fromEntries(
+    Object.entries(errors)
+      .filter(([key]) => key.startsWith("employment."))
+      .map(([key, message]) => [key.replace("employment.", ""), message]),
+  );
+
 
   /* =====================================================
      UI
@@ -418,7 +479,6 @@ const [
   return (
     <div>
       <main>
-
         <ToastContainer
           position="top-right"
           autoClose={4000}
@@ -433,7 +493,6 @@ const [
         <Header />
 
         <form onSubmit={handleSubmit}>
-
           {/* =========================================
               GENERAL DETAILS
           ========================================== */}
@@ -466,6 +525,7 @@ const [
             <ICTEmploymentDetails
               value={employmentDetails}
               onChange={setEmploymentDetails}
+              errors={employmentErrors}
             />
           </div>
 
@@ -477,6 +537,7 @@ const [
             <ICTEducationQualifications
               value={educationQualifications}
               onChange={setEducationQualifications}
+              errors={educationErrors}
             />
           </div>
 
@@ -485,13 +546,11 @@ const [
           ========================================== */}
 
           <div data-section="declaration">
-
             <Declaration
               accepted={declarationAccepted}
               onChange={handleDeclarationChange}
               error={errors.declaration}
             />
-
           </div>
 
           {/* =========================================
@@ -499,16 +558,10 @@ const [
           ========================================== */}
 
           <div className="submit-area">
-
-            <button
-              type="submit"
-              className="btn"
-            >
+            <button type="submit" className="btn">
               Submit Application
             </button>
-
           </div>
-
         </form>
 
         {/* =========================================
@@ -516,7 +569,6 @@ const [
         ========================================== */}
 
         <Footer />
-
       </main>
     </div>
   );

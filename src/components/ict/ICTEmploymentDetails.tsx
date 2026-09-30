@@ -1,16 +1,17 @@
 import type { EmploymentDetails } from "../../types/ict";
-//import SelectField from "../common/SelectField";
 import TextField from "../common/TextField";
 import SectionCard from "../common/SectionCard";
 
 interface ICTEmploymentDetailsProps {
   value: EmploymentDetails;
   onChange: (value: EmploymentDetails) => void;
+  errors?: Record<string, string>;
 }
 
 export default function ICTEmploymentDetails({
   value,
   onChange,
+  errors = {},
 }: ICTEmploymentDetailsProps) {
   const updateField = <K extends keyof EmploymentDetails>(
     field: K,
@@ -23,63 +24,38 @@ export default function ICTEmploymentDetails({
   };
 
   return (
-    <SectionCard title="Employment Information"
-    number = "03"
-    description="Please enter your employment information"
+    <SectionCard
+      title="Employment Information"
+      number="03"
+      description="Please enter your current employment information"
     >
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {/* <SelectField
-          label="Whether employed in public sector"
-          name="isPublicSectorEmployee"
-          value={value.isPublicSectorEmployee}
-          onChange={(value) =>
-            updateField(
-              "isPublicSectorEmployee",
-              value as EmploymentDetails["isPublicSectorEmployee"]
-            )
-          }
-          options={[
-            {
-              value: "Yes",
-              label: "Yes",
-            },
-            {
-              value: "No",
-              label: "No",
-            },
-          ]}
-          placeholder="Select"
-        /> */}
+      <div className="form-grid">
 
         <TextField
           label="Work Place"
           name="workplace"
           value={value.workplace}
-          onChange={(value) => updateField("workplace", value)}
+          onChange={(value) =>
+            updateField("workplace", value)
+          }
+          placeholder="Enter your current work place"
+          required
+          error={errors.workplace}
         />
-      </div>
 
-          <TextField
-          label="Current Service Releated Position / දැනට ඔබ දරන තනතුර"
+        <TextField
+          label="Current Position"
           name="currentPosition"
-          value={""}
-          onChange={(value) => updateField("workplace", value)}
-          placeholder="2 II or 2 I"
-          error={""}
+          value={value.currentPosition}
+          onChange={(value) =>
+            updateField("currentPosition", value)
+          }
+          placeholder="Example: Grade II / Grade I"
+          required
+          error={errors.currentPosition}
         />
 
-      {/* {value.isPublicSectorEmployee === "Yes" && (
-        <div className="mt-4">
-          <TextField
-            label="Service particulars"
-            name="serviceParticulars"
-            value={value.serviceParticulars}
-            onChange={(value) =>
-              updateField("serviceParticulars", value)
-            }
-          />
-        </div>
-      )} */}
+      </div>
     </SectionCard>
   );
 }

@@ -9,8 +9,7 @@ export interface SpecializedField {
 }
 
 export interface EmploymentDetails {
-  isPublicSectorEmployee: "Yes" | "No" | "";
-  serviceParticulars: string;
+  currentPosition: string;
   workplace: string;
 }
 
@@ -28,7 +27,7 @@ export interface EducationQualifications {
   postGraduateUniversity: string;
   postGraduateSpecialization: string;
   postGraduateEffectiveDate: string;
-  
+
 }
 
 export interface SpecializedFieldRating {
@@ -91,10 +90,4 @@ export interface ICTFormData {
   researchPapers: ResearchPaper[];
 
   awards: string;
-}
-
-export interface EmploymentDetails {
-  isPublicSectorEmployee: "Yes" | "No" | "";
-  serviceParticulars: string;
-  workplace: string;
 }

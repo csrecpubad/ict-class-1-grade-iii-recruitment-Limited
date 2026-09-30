@@ -274,38 +274,12 @@ export function validateEmploymentDetails(
 ): FormErrors {
   const errors: FormErrors = {};
 
-  /* -----------------------------------------------
-     Public Sector Employment
-  ------------------------------------------------ */
-
-  errors.isPublicSectorEmployee =
-    required(
-      data.isPublicSectorEmployee,
-      "Public sector employment status"
-    );
-
-  /* -----------------------------------------------
-     Service Particulars
-     
-     Required only if the applicant is employed
-     in the public sector.
-  ------------------------------------------------ */
-
-  if (
-    data.isPublicSectorEmployee ===
-    "Yes"
-  ) {
-    errors.serviceParticulars =
-      required(
-        data.serviceParticulars,
-        "Service particulars"
-      );
-  }
-
-  /* -----------------------------------------------
-     Work Place
-  ------------------------------------------------ */
-
+  
+  errors.currentPosition = required(
+    data.currentPosition,
+    "Current service related position"
+  );
+  
   errors.workplace = required(
     data.workplace,
     "Work place"
@@ -323,12 +297,58 @@ export function validateEducationQualifications(
 ): FormErrors {
   const errors: FormErrors = {};
 
+  /* =======================================================
+     GCE A/L
+  ======================================================= */
+
+  errors.alPassed = required(
+    data.alPassed,
+    "GCE A/L result"
+  );
+
   /* -----------------------------------------------
-     Education Qualification
-     
-     The document specifies:
-     Full BSc. in ICT (3 years)
+     A/L Stream
+
+     Required when GCE A/L is passed.
   ------------------------------------------------ */
+
+  if (data.alPassed === "Passed") {
+    errors.alStream = required(
+      data.alStream,
+      "A/L stream"
+    );
+
+    /* -----------------------------------------------
+       A/L Subject 01
+    ------------------------------------------------ */
+
+    errors.alSub1 = required(
+      data.alSub1,
+      "A/L Subject 01"
+    );
+
+    /* -----------------------------------------------
+       A/L Subject 02
+    ------------------------------------------------ */
+
+    errors.alSub2 = required(
+      data.alSub2,
+      "A/L Subject 02"
+    );
+
+    /* -----------------------------------------------
+       A/L Subject 03
+    ------------------------------------------------ */
+
+    errors.alSub3 = required(
+      data.alSub3,
+      "A/L Subject 03"
+    );
+  }
+
+  /* =======================================================
+     DEGREE / MAIN QUALIFICATION
+  ======================================================= */
 
   errors.qualification =
     required(
@@ -337,50 +357,156 @@ export function validateEducationQualifications(
     );
 
   /* -----------------------------------------------
-     GCE A/L
+     University / Institute
   ------------------------------------------------ */
 
-  errors.alPassed =
+  errors.university =
     required(
-      data.alPassed,
-      "GCE A/L result"
+      data.university,
+      "University / Institute / College"
     );
 
   /* -----------------------------------------------
-     A/L Stream
-     
-     Required when GCE A/L is passed.
+     Specialization / Major
   ------------------------------------------------ */
 
-  if (
-    data.alPassed === "Passed"
+  errors.specialization =
+    required(
+      data.specialization,
+      "Specialization / Major"
+    );
+
+  /* -----------------------------------------------
+     Degree Effective Date
+  ------------------------------------------------ */
+
+  if (!data.degreeEffectiveDate.trim()) {
+    errors.degreeEffectiveDate =
+      "Degree effective date is required.";
+  } else if (
+    !isValidDate(
+      data.degreeEffectiveDate
+    )
   ) {
-    errors.alStream =
+    errors.degreeEffectiveDate =
+      "Enter a valid degree effective date.";
+  } else if (
+    isFutureDate(
+      data.degreeEffectiveDate
+    )
+  ) {
+    errors.degreeEffectiveDate =
+      "Degree effective date cannot be in the future.";
+  }
+
+  /* =======================================================
+     POSTGRADUATE QUALIFICATION
+     
+     All postgraduate fields are optional because
+     not every applicant will have a postgraduate
+     qualification.
+  ======================================================= */
+
+  const hasPostGraduateQualification =
+    data.postGraduateQualification.trim() !== "";
+
+  if (hasPostGraduateQualification) {
+
+    /* -----------------------------------------------
+       Postgraduate University
+    ------------------------------------------------ */
+
+    errors.postGraduateUniversity =
       required(
-        data.alStream,
-        "A/L stream"
+        data.postGraduateUniversity,
+        "Postgraduate university / institute / college"
       );
+
+    /* -----------------------------------------------
+       Postgraduate Specialization
+    ------------------------------------------------ */
+
+    errors.postGraduateSpecialization =
+      required(
+        data.postGraduateSpecialization,
+        "Postgraduate specialization / major"
+      );
+
+    /* -----------------------------------------------
+       Postgraduate Effective Date
+    ------------------------------------------------ */
+
+    if (
+      !data.postGraduateEffectiveDate.trim()
+    ) {
+      errors.postGraduateEffectiveDate =
+        "Postgraduate qualification effective date is required.";
+    } else if (
+      !isValidDate(
+        data.postGraduateEffectiveDate
+      )
+    ) {
+      errors.postGraduateEffectiveDate =
+        "Enter a valid postgraduate qualification effective date.";
+    } else if (
+      isFutureDate(
+        data.postGraduateEffectiveDate
+      )
+    ) {
+      errors.postGraduateEffectiveDate =
+        "Postgraduate qualification effective date cannot be in the future.";
+    }
   }
 
-  /* -----------------------------------------------
-     Specialized Fields
-  ------------------------------------------------ */
+  /* =======================================================
+     ICT SPECIALIZED FIELDS
+  ======================================================= */
 
-data.specializedFields.forEach((field, index) => {
-  if (!field.academicCompleted) {
-    errors[`specializedFields.${index}.academic`] =
-      `${field.field}: Please select Yes or No for academic completion.`;
-  }
+  data.specializedFields.forEach(
+    (field, index) => {
 
-  if (field.experienceRating === null) {
-    errors[`specializedFields.${index}.experience`] =
-      `${field.field}: Please select a professional experience rating.`;
-  }
-});
+      /* -----------------------------------------------
+         Academic Qualification
+      ------------------------------------------------ */
 
-  /* -----------------------------------------------
-     Professional Memberships
-  ------------------------------------------------ */
+      if (
+        !field.academicCompleted
+      ) {
+        errors[
+          `specializedFields.${index}.academic`
+        ] =
+          `${field.field}: Please select Yes or No for academic completion.`;
+      }
+
+      /* -----------------------------------------------
+         Professional Experience Rating
+         
+         Rating must be from 1 to 5.
+      ------------------------------------------------ */
+
+      if (
+        field.experienceRating === null ||
+        field.experienceRating === undefined
+      ) {
+        errors[
+          `specializedFields.${index}.experience`
+        ] =
+          `${field.field}: Please select a professional experience rating.`;
+      } else if (
+        field.experienceRating < 1 ||
+        field.experienceRating > 5
+      ) {
+        errors[
+          `specializedFields.${index}.experience`
+        ] =
+          `${field.field}: Professional experience rating must be between 1 and 5.`;
+      }
+    }
+  );
+
+  /* =======================================================
+     PROFESSIONAL MEMBERSHIPS
+  ======================================================= */
 
   errors.professionalMemberships =
     required(
@@ -388,9 +514,9 @@ data.specializedFields.forEach((field, index) => {
       "Professional memberships"
     );
 
-  /* -----------------------------------------------
-     Professional Qualifications
-  ------------------------------------------------ */
+  /* =======================================================
+     PROFESSIONAL QUALIFICATIONS
+  ======================================================= */
 
   errors.professionalQualifications =
     required(
@@ -398,19 +524,23 @@ data.specializedFields.forEach((field, index) => {
       "Professional qualifications"
     );
 
-  /* -----------------------------------------------
-     Professional Qualifications - Other
-  ------------------------------------------------ */
+  /* =======================================================
+     PROFESSIONAL QUALIFICATIONS - OTHER
+     
+     Optional.
+  ======================================================= */
 
   /*
-   * This field is optional because it is only
-   * applicable when the applicant has another
-   * professional qualification.
+   * professionalQualificationsOther is optional.
+   *
+   * It is only used when the applicant has another
+   * professional qualification that is not covered
+   * by the main professional qualification field.
    */
 
-  /* -----------------------------------------------
-     Technology Skills
-  ------------------------------------------------ */
+  /* =======================================================
+     TECHNOLOGY SKILLS
+  ======================================================= */
 
   errors.technologySkills =
     required(
@@ -418,20 +548,22 @@ data.specializedFields.forEach((field, index) => {
       "Programming languages, frameworks and related technologies"
     );
 
-  /* -----------------------------------------------
-     Research Paper
-  ------------------------------------------------ */
-
-  /*
-   * Research papers are not made mandatory here.
-   * The document asks for these details, but it
-   * does not indicate that every applicant must
-   * have a published research paper.
-   */
+  /* =======================================================
+     RESEARCH PAPER
+     
+     Research paper information is optional.
+     
+     If Topic is entered, the remaining research
+     information becomes required.
+  ======================================================= */
 
   if (
     data.researchPaper.topic.trim()
   ) {
+
+    /* -----------------------------------------------
+       Year
+    ------------------------------------------------ */
 
     if (
       !data.researchPaper.year.trim()
@@ -440,7 +572,20 @@ data.specializedFields.forEach((field, index) => {
         "researchPaper.year"
       ] =
         "Research paper year is required.";
+    } else if (
+      !/^\d{4}$/.test(
+        data.researchPaper.year.trim()
+      )
+    ) {
+      errors[
+        "researchPaper.year"
+      ] =
+        "Enter a valid four-digit research paper year.";
     }
+
+    /* -----------------------------------------------
+       Local / International
+    ------------------------------------------------ */
 
     if (
       !data.researchPaper.type
@@ -450,6 +595,10 @@ data.specializedFields.forEach((field, index) => {
       ] =
         "Select Local or International.";
     }
+
+    /* -----------------------------------------------
+       Institute / Magazine
+    ------------------------------------------------ */
 
     if (
       !data.researchPaper
@@ -463,13 +612,16 @@ data.specializedFields.forEach((field, index) => {
     }
   }
 
-  /* -----------------------------------------------
-     Awards
-  ------------------------------------------------ */
+  /* =======================================================
+     AWARDS
+     
+     Optional.
+  ======================================================= */
 
   /*
-   * Awards are optional.
+   * Awards are optional, so no validation is required.
    */
+
   return removeEmptyErrors(errors);
 }
 
@@ -565,19 +717,7 @@ export function validateForm(
         message;
     }
   );
-// const qualificationErrors =
-//   validateICTQualificationDetails(
-//     data.education
-//   );
 
-// Object.entries(
-//   qualificationErrors
-// ).forEach(
-//   ([field, message]) => {
-//     errors[`education.${field}`] =
-//       message;
-//   }
-// );
   /* -----------------------------------------------
      Declaration
   ------------------------------------------------ */

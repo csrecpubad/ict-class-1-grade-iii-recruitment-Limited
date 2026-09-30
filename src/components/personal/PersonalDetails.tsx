@@ -258,7 +258,7 @@ export default function PersonalDetails({
 
         {/* Permanent Address */}
         <TextField
-          label="Permanent Address"
+          label="Permanent Address (Sinhala / Tamil)"
           name="permanentAddress"
           value={data.permanentAddress}
           onChange={(value) => onChange("permanentAddress", value)}
@@ -269,7 +269,7 @@ export default function PersonalDetails({
 
         {/* Appointment Address */}
         <TextField
-          label="Address to which Appointment Letter should be sent"
+          label="Address to which Appointment Letter should be sent (Sinhala / Tamil)"
           name="appointmentAddress"
           value={data.appointmentAddress}
           onChange={(value) => onChange("appointmentAddress", value)}

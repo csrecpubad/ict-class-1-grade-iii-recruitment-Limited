@@ -17,7 +17,7 @@ export default function Footer() {
         </p>
 
         <p className="footer-version">
-          Version 1.0.5
+          Version 1.8
         </p>
 
         {/* Contact Information */}

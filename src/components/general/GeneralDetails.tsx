@@ -35,7 +35,7 @@ export default function GeneralDetails({
             onChange("callingNumber", value)
           }
           placeholder="Enter interview calling number"
-          example="Example: ICT/001"
+          example="Example: ICTS/1-III/L/001"
           required
           error={errors.callingNumber}
         />
@@ -49,7 +49,6 @@ export default function GeneralDetails({
             onChange("email", value)
           }
           placeholder="Enter your email address"
-          example="Example: applicant@example.com"
           required
           error={errors.email}
         />
