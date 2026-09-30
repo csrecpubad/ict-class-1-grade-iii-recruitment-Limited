@@ -1556,3 +1556,31 @@ img {
 .specialized-field-example em {
   font-style: italic;
 }
+
+.academic-options,
+.specialized-rating {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.specialized-field-error {
+  flex-basis: 100%;
+  width: 100%;
+  margin-top: 6px;
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.specialized-row-error {
+  border-left: 3px solid #dc2626;
+  background-color: #fff7f7;
+}
+
+.specialized-row-error
+  .specialized-field-title {
+  color: #b91c1c;
+}

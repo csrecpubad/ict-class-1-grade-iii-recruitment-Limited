@@ -238,47 +238,90 @@ export default function ICTEducationQualifications({
           </div>
 
           {value.specializedFields.map(
-            (field: SpecializedField, index: number) => (
-              <div className="specialized-row" key={field.field}>
-                <div className="specialized-field-name">
-                  <div className="specialized-field-title">
-                    {index + 1}. {field.field}
-                  </div>
-                  <div className="specialized-field-example">
-                    <em>{specializedFieldExamples[field.field].academic}</em>
-                  </div>
-                </div>
+  (field: SpecializedField, index: number) => {
+    const academicError =
+      errors?.[
+        `specializedFields.${index}.academic`
+      ];
 
-                <div className="academic-options">
-                  <label className="rating-option">
-                    <input
-                      type="radio"
-                      name={`academic-${index}`}
-                      value="Yes"
-                      checked={field.academicCompleted === "Yes"}
-                      onChange={() => updateAcademicStatus(index, "Yes")}
-                      required
-                    />
+    return (
+      <div
+        className={`specialized-row ${
+          academicError
+            ? "specialized-row-error"
+            : ""
+        }`}
+        key={field.field}
+      >
+        <div className="specialized-field-name">
+          <div className="specialized-field-title">
+            {index + 1}. {field.field}
+          </div>
 
-                    <span>Yes</span>
-                  </label>
+          <div className="specialized-field-example">
+            <em>
+              {
+                specializedFieldExamples[
+                  field.field
+                ].academic
+              }
+            </em>
+          </div>
+        </div>
 
-                  <label className="rating-option">
-                    <input
-                      type="radio"
-                      name={`academic-${index}`}
-                      value="No"
-                      checked={field.academicCompleted === "No"}
-                      onChange={() => updateAcademicStatus(index, "No")}
-                      required
-                    />
+        <div className="academic-options">
+          <label className="rating-option">
+            <input
+              type="radio"
+              name={`academic-${index}`}
+              value="Yes"
+              checked={
+                field.academicCompleted ===
+                "Yes"
+              }
+              onChange={() =>
+                updateAcademicStatus(
+                  index,
+                  "Yes"
+                )
+              }
+              
+            />
 
-                    <span>No</span>
-                  </label>
-                </div>
-              </div>
-            ),
+            <span>Yes</span>
+          </label>
+
+          <label className="rating-option">
+            <input
+              type="radio"
+              name={`academic-${index}`}
+              value="No"
+              checked={
+                field.academicCompleted ===
+                "No"
+              }
+              onChange={() =>
+                updateAcademicStatus(
+                  index,
+                  "No"
+                )
+              }
+              
+            />
+
+            <span>No</span>
+          </label>
+
+          {academicError && (
+            <div className="specialized-field-error">
+             {academicError}
+            </div>
           )}
+        </div>
+      </div>
+    );
+  }
+)}
         </div>
       </div>
 
@@ -301,42 +344,76 @@ export default function ICTEducationQualifications({
           </div>
 
           {value.specializedFields.map(
-            (field: SpecializedField, index: number) => (
-              <div
-                className="specialized-row"
-                key={`experience-${field.field}`}
+  (field: SpecializedField, index: number) => {
+    const experienceError =
+      errors?.[
+        `specializedFields.${index}.experience`
+      ];
+
+    return (
+      <div
+        className={`specialized-row ${
+          experienceError
+            ? "specialized-row-error"
+            : ""
+        }`}
+        key={`experience-${field.field}`}
+      >
+        <div className="specialized-field-name">
+          <div className="specialized-field-title">
+            {index + 1}. {field.field}
+          </div>
+
+          <div className="specialized-field-example">
+            <em>
+              {
+                specializedFieldExamples[
+                  field.field
+                ].professional
+              }
+            </em>
+          </div>
+        </div>
+
+        <div className="specialized-rating">
+          {[1, 2, 3, 4, 5].map(
+            (rating) => (
+              <label
+                key={rating}
+                className="rating-option"
               >
-                <div className="specialized-field-name">
-                  <div className="specialized-field-title">
-                    {index + 1}. {field.field}
-                  </div>
+                <input
+                  type="radio"
+                  name={`experience-${index}`}
+                  value={rating}
+                  checked={
+                    field.experienceRating ===
+                    rating
+                  }
+                  onChange={() =>
+                    updateExperienceRating(
+                      index,
+                      rating
+                    )
+                  }
+                  
+                />
 
-                  <div className="specialized-field-example">
-                    <em>
-                      {specializedFieldExamples[field.field].professional}
-                    </em>
-                  </div>
-                </div>
-
-                <div className="specialized-rating">
-                  {[1, 2, 3, 4, 5].map((rating) => (
-                    <label key={rating} className="rating-option">
-                      <input
-                        type="radio"
-                        name={`experience-${index}`}
-                        value={rating}
-                        checked={field.experienceRating === rating}
-                        onChange={() => updateExperienceRating(index, rating)}
-                        required
-                      />
-
-                      <span>{rating}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-            ),
+                <span>{rating}</span>
+              </label>
+            )
           )}
+
+          {experienceError && (
+            <div className="specialized-field-error">
+             {experienceError}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+)}
         </div>
       </div>
 
