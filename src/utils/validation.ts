@@ -366,20 +366,17 @@ export function validateEducationQualifications(
      Specialized Fields
   ------------------------------------------------ */
 
-  data.specializedFields.forEach(
-    (field, index) => {
+data.specializedFields.forEach((field, index) => {
+  if (!field.academicCompleted) {
+    errors[`specializedFields.${index}.academic`] =
+      `${field.field}: Please select Yes or No for academic completion.`;
+  }
 
-      if (
-        field.rating === null
-      ) {
-        errors[
-          `specializedFields.${index}`
-        ] =
-          `${field.field} rating is required.`;
-      }
-
-    }
-  );
+  if (field.experienceRating === null) {
+    errors[`specializedFields.${index}.experience`] =
+      `${field.field}: Please select a professional experience rating.`;
+  }
+});
 
   /* -----------------------------------------------
      Professional Memberships

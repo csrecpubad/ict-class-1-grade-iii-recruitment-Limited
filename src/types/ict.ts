@@ -1,5 +1,13 @@
 // src/types/ict.ts
 
+import type { SpecializedFieldName } from "../constants/ictFields";
+
+export interface SpecializedField {
+  field: SpecializedFieldName;
+  academicCompleted: "Yes" | "No" | "";
+  experienceRating: number | null;
+}
+
 export interface EmploymentDetails {
   isPublicSectorEmployee: "Yes" | "No" | "";
   serviceParticulars: string;
@@ -7,9 +15,20 @@ export interface EmploymentDetails {
 }
 
 export interface EducationQualifications {
-  qualification: string;
   alPassed: "Passed" | "Not passed" | "";
   alStream: string;
+  alSub1: string;
+  alSub2: string;
+  alSub3: string;
+  qualification: string;
+  university: string;
+  specialization : string;
+  degreeEffectiveDate: string;
+  postGraduateQualification: string;
+  postGraduateUniversity: string;
+  postGraduateSpecialization: string;
+  postGraduateEffectiveDate: string;
+  
 }
 
 export interface SpecializedFieldRating {
@@ -31,13 +50,15 @@ export interface EducationQualifications {
   qualification: string;
 
   alPassed: "Passed" | "Not passed" | "";
+
   alStream: string;
 
-  specializedFields: SpecializedFieldRating[];
+  specializedFields: SpecializedField[];
 
   professionalMemberships: string;
 
   professionalQualifications: string;
+
   professionalQualificationsOther: string;
 
   technologySkills: string;

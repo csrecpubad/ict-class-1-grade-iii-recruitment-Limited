@@ -16,140 +16,140 @@ interface PersonalDetailsProps {
 const prefixOptions = [
   {
     value: "Mr",
-    label: "Mr / මයා / திரு",
+    label: "Mr",
   },
   {
     value: "Miss",
-    label: "Miss / මෙය / செல்வி",
+    label: "Miss",
   },
   {
     value: "Mrs",
-    label: "Mrs / මිය / திருமதி",
+    label: "Mrs",
   },
 ];
 
 const genderOptions = [
   {
     value: "Male",
-    label: "Male / පුරුෂ / ஆண்",
+    label: "Male",
   },
   {
     value: "Female",
-    label: "Female / ස්ත්‍රී / பெண்",
+    label: "Female",
   },
 ];
 
 const civilStatusOptions = [
   {
     value: "Unmarried",
-    label: "Unmarried / අවිවාහක / திருமணமாகாதவர்",
+    label: "Unmarried",
   },
   {
     value: "Married",
-    label: "Married / විවාහක / திருமணமானவர்",
+    label: "Married",
   },
 ];
 
 const districtOptions = [
   {
     value: "Colombo",
-    label: "Colombo / කොළඹ / கொழும்பு",
+    label: "Colombo",
   },
   {
     value: "Gampaha",
-    label: "Gampaha / ගම්පහ / கம்பஹா",
+    label: "Gampaha",
   },
   {
     value: "Kalutara",
-    label: "Kalutara / කළුතර / களுத்தாரா",
+    label: "Kalutara",
   },
   {
     value: "Kandy",
-    label: "Kandy / නුවර / கண்டி",
+    label: "Kandy",
   },
   {
     value: "Matale",
-    label: "Matale / මාතලේ / மாத்தளை",
+    label: "Matale",
   },
   {
     value: "Nuwara Eliya",
-    label: "Nuwara Eliya / නුවරඑළිය / நுவரெலியா",
+    label: "Nuwara Eliya",
   },
   {
     value: "Galle",
-    label: "Galle / ගාල්ල / காலி",
+    label: "Galle",
   },
   {
     value: "Matara",
-    label: "Matara / මාතර / மாத்தறை",
+    label: "Matara",
   },
   {
     value: "Hambantota",
-    label: "Hambantota / හම්බන්තොට / அம்பாந்தோட்டை",
+    label: "Hambantota",
   },
   {
     value: "Jaffna",
-    label: "Jaffna / යාපනය / யாழ்ப்பாணம்",
+    label: "Jaffna",
   },
   {
     value: "Mannar",
-    label: "Mannar / මන්නාරම / மன்னார்",
+    label: "Mannar",
   },
   {
     value: "Mullaitivu",
-    label: "Mullaitivu / මුලතිව් / முல்லைத்தீவு",
+    label: "Mullaitivu",
   },
   {
     value: "Vavuniya",
-    label: "Vavuniya / වවුනියාව / வவுனியா",
+    label: "Vavuniya",
   },
   {
     value: "Kilinochchi",
-    label: "Kilinochchi / කිලිනොච්චි / கிளிநொச்சி",
+    label: "Kilinochchi",
   },
   {
     value: "Trincomalee",
-    label: "Trincomalee / ත්‍රිකුණාමලය / திருகோணமலை",
+    label: "Trincomalee",
   },
   {
     value: "Batticaloa",
-    label: "Batticaloa / මඩකලපුව / மட்டக்களப்பு",
+    label: "Batticaloa",
   },
   {
     value: "Ampara",
-    label: "Ampara / අම්පාර / அம்பாறை",
+    label: "Ampara",
   },
   {
     value: "Puttalam",
-    label: "Puttalam / පුත්තලම / புத்தளம்",
+    label: "Puttalam",
   },
   {
     value: "Kurunegala",
-    label: "Kurunegala / කුරුණෑගල / குருநாகல்",
+    label: "Kurunegala",
   },
   {
     value: "Anuradhapura",
-    label: "Anuradhapura / අනුරාධපුර / அனுராதபுரம்",
+    label: "Anuradhapura",
   },
   {
     value: "Polonnaruwa",
-    label: "Polonnaruwa / පොළොන්නරුව / பொலன்னறுவை",
+    label: "Polonnaruwa",
   },
   {
     value: "Badulla",
-    label: "Badulla / බදුල්ල / பதுளை",
+    label: "Badulla",
   },
   {
     value: "Monaragala",
-    label: "Monaragala / මොණරාගල / மொனராகலை",
+    label: "Monaragala",
   },
   {
     value: "Kegalle",
-    label: "Kegalle / කෑගල්ල / கேகாலை",
+    label: "Kegalle",
   },
   {
     value: "Ratnapura",
-    label: "Ratnapura / රත්නපුර / இரத்தினபுரி",
+    label: "Ratnapura",
   },
 ];
 
@@ -161,13 +161,13 @@ export default function PersonalDetails({
   return (
     <SectionCard
       number="02"
-      title="Personal Details / පෞද්ගලික තොරතුරු / தனிப்பட்ட தகவல்"
+      title="Personal Details"
       description="Please enter your personal and contact information"
     >
       <div className="form-grid">
         {/* Prefix */}
         <SelectField
-          label="Prefix / මයා/මෙය/මිය / திரு/திருமதி/செல்வி"
+          label="Prefix"
           name="prefix"
           value={data.prefix}
           options={prefixOptions}
@@ -184,19 +184,19 @@ export default function PersonalDetails({
           value={data.nameEnglish}
           onChange={(value) => onChange("nameEnglish", value)}
           placeholder="Enter name with initials"
-          example="Example: A.B.C.D. Perera"
+          example="Example: R.D.K.S.Kumarasinghe"
           required
           error={errors.nameEnglish}
         />
 
         {/* Name with initials - Sinhala/Tamil */}
         <TextField
-          label="Name with Initials / මුලකුරු සමග නම / ஆரம்ப எழுத்துக்களுடன் பெயர்  (Sinhala / Tamil)"
+          label="Name with Initials (Sinhala / Tamil)"
           name="nameSinhala"
           value={data.nameSinhala}
           onChange={(value) => onChange("nameSinhala", value)}
           placeholder="Enter name with initials"
-          example="Example: ඒ.බී.සී.ඩී. පෙරේරා / ஏ.பி.சி.டி. பேரேரா"
+          example="Example: ආර්.ඩී.කේ.එස්.කුමාරසිංහ / ஆர்.டி.கே.எஸ்.குமாரசிங்கே"
           required
           error={errors.nameSinhala}
         />
@@ -208,19 +208,19 @@ export default function PersonalDetails({
           value={data.fullNameEnglish}
           onChange={(value) => onChange("fullNameEnglish", value)}
           placeholder="Enter full name"
-          example="Example: Anole Berd Chirsh Perera"
+          example="Example: Ruwan Dinesh Kumara saman Kumarasinghe"
           required
           error={errors.fullNameEnglish}
         />
 
         {/* Full name - Sinhala/Tamil */}
         <TextField
-          label="Full Name / සම්පූර්ණ නම / முழு பெயர் (Sinhala/Tamil) "
+          label="Full Name (Sinhala/Tamil) "
           name="fullNameSinhala"
           value={data.fullNameSinhala}
           onChange={(value) => onChange("fullNameSinhala", value)}
           placeholder="Enter full name"
-          example="Example: අනෝල් බර්ඩ් චර්ෂ් පෙරේරා / அனோல் பெர்ட் சிர்ஷ் பேரேரா"
+          example="Example: රුවන් දිනයේෂ් කුමාර සමන් කුමාරසිංහ / ருவான் தினேஷ் குமார சமன் குமாரசிங்கே"
           required
           error={errors.fullNameSinhala}
         />
@@ -234,7 +234,7 @@ export default function PersonalDetails({
 
         {/* Gender */}
         <SelectField
-          label="Gender / ස්ත්‍රී/පුරුෂ භාවය / பாலினம்"
+          label="Gender"
           name="gender"
           value={data.gender}
           options={genderOptions}
@@ -246,7 +246,7 @@ export default function PersonalDetails({
 
         {/* Civil Status */}
         <SelectField
-          label="Civil Status / විවාහක/අවිවාහකභාවය / சிவில் நிலை"
+          label="Civil Status"
           name="civilStatus"
           value={data.civilStatus}
           options={civilStatusOptions}
@@ -258,7 +258,7 @@ export default function PersonalDetails({
 
         {/* Permanent Address */}
         <TextField
-          label="Permanent Address / ස්ථීර ලිපිනය / நிரந்தர முகவரி"
+          label="Permanent Address"
           name="permanentAddress"
           value={data.permanentAddress}
           onChange={(value) => onChange("permanentAddress", value)}
@@ -269,7 +269,7 @@ export default function PersonalDetails({
 
         {/* Appointment Address */}
         <TextField
-          label="Address to which Appointment Letter should be sent / පත්වීම් ලිපිය යොමු කළ යුතු ලිපිනය / நியமனக் கடிதம் அனுப்ப வேண்டிய முகவரி"
+          label="Address to which Appointment Letter should be sent"
           name="appointmentAddress"
           value={data.appointmentAddress}
           onChange={(value) => onChange("appointmentAddress", value)}
@@ -280,7 +280,7 @@ export default function PersonalDetails({
 
         {/* Residential District */}
         <SelectField
-          label="Residential District / පදිංචි දිස්ත්‍රික්කය / மாவட்டம்"
+          label="Residential District"
           name="residentialDistrict"
           value={data.residentialDistrict}
           options={districtOptions}
@@ -292,7 +292,7 @@ export default function PersonalDetails({
 
         {/* Mobile */}
         <TextField
-          label="Mobile Number / ජංගම දුරකථන අංකය / கையடக்கத் தொலைபேசி இல."
+          label="Mobile Number"
           name="mobile"
           type="tel"
           value={data.mobile}
@@ -316,13 +316,13 @@ export default function PersonalDetails({
 
         {/* Birthday */}
         <DateField
-          label="Date of Birth / උපන් දිනය / பிறந்த திகதி"
+          label="Date of Birth"
           name="birthday"
           value={data.birthday}
           onChange={(value) => {
             onChange("birthday", value);
 
-            const calculatedAge = calculateAge(value, "2025-06-30");
+            const calculatedAge = calculateAge(value, "2025-12-08");
 
             onChange("age", calculatedAge);
           }}
@@ -332,7 +332,7 @@ export default function PersonalDetails({
 
         {/* Age */}
         <TextField
-          label="Age as at 30.06.2025 / 2025.06.30 දිනට වයස"
+          label="Age as at 80.12.2025 (Automatically calculated)"
           name="age"
           value={data.age}
           onChange={() => {}}

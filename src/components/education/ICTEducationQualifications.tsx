@@ -1,11 +1,12 @@
 import type {
   EducationQualifications,
-  SpecializedFieldRating,
+  SpecializedField,
 } from "../../types/ict";
 
 import TextField from "../common/TextField";
 import SelectField from "../common/SelectField";
 import SectionCard from "../common/SectionCard";
+import { specializedFieldExamples } from "../../constants/ictFields";
 
 // import {
 //   specializedFields,
@@ -43,24 +44,33 @@ export default function ICTEducationQualifications({
      SPECIALIZED FIELD RATING
   ===================================================== */
 
-  const updateSpecializedField = (
-    index: number,
-    rating: number
-  ) => {
-    const updatedFields = [
-      ...value.specializedFields,
-    ];
+  const updateAcademicStatus = (
+  index: number,
+  status: "Yes" | "No"
+) => {
+  const updatedFields = [...value.specializedFields];
 
-    updatedFields[index] = {
-      ...updatedFields[index],
-      rating,
-    };
-
-    updateField(
-      "specializedFields",
-      updatedFields
-    );
+  updatedFields[index] = {
+    ...updatedFields[index],
+    academicCompleted: status,
   };
+
+  updateField("specializedFields", updatedFields);
+};
+
+const updateExperienceRating = (
+  index: number,
+  rating: number
+) => {
+  const updatedFields = [...value.specializedFields];
+
+  updatedFields[index] = {
+    ...updatedFields[index],
+    experienceRating: rating,
+  };
+
+  updateField("specializedFields", updatedFields);
+};
 
   return (
     <SectionCard
@@ -77,17 +87,7 @@ export default function ICTEducationQualifications({
   </h3>
 
   <div className="form-grid">
-    <TextField
-      label="Education Qualification"
-      name="qualification"
-      value={value.qualification}
-      onChange={(text) =>
-        updateField("qualification", text)
-      }
-      placeholder="Full BSc. in ICT (3 years)"
-    />
-
-    <SelectField
+        <SelectField
       label="GCE A/L"
       name="alPassed"
       value={value.alPassed}
@@ -108,6 +108,7 @@ export default function ICTEducationQualifications({
         },
       ]}
       placeholder="Select"
+      required
     />
   </div>
 
@@ -120,81 +121,291 @@ export default function ICTEducationQualifications({
         updateField("alStream", text)
       }
       placeholder="Enter A/L stream"
+      required
     />
-  </div>
+    <TextField
+            label="Subject 01"
+            name="alSub1"
+            value={value.alSub1}
+            onChange={(value) =>
+              updateField("alSub1", value)
+            }
+            placeholder="Subject Name - Result"
+            required
+            // error={alErrors.alSub1}
+          />
 
+          <TextField
+            label="Subject 02"
+            name="alSub2"
+            value={value.alSub2}
+            onChange={(value) =>
+              updateField("alSub2", value)
+            }
+            placeholder="Subject Name - Result"
+            required
+            // error={alErrors.alSub2}
+          />
+
+          <TextField
+            label="Subject 03"
+            name="alSub3"
+            value={value.alSub3}
+            onChange={(value) =>
+              updateField("alSub3", value)
+            }
+            placeholder="Subject Name - Result"
+            required
+            // error={alErrors.alSub3}
+          />
+
+    <TextField
+      label="Title / Name of the Degree"
+      name="qualification"
+      value={value.qualification}
+      onChange={(text) =>
+        updateField("qualification", text)
+      }
+      placeholder="Full BSc. in ICT (3 years)"
+      required
+    />
+
+    <TextField
+    label="University / Institute / College"
+      name="university"
+      value={value.university}
+      onChange={(text) =>
+        updateField("university", text)
+      }
+      placeholder="University Name"
+      required
+    />
+
+    <TextField
+      label="Specialization / Major"
+      name="specialization"
+      value={value.specialization}
+      onChange={(text) =>
+        updateField("specialization", text)
+      }
+      placeholder="Specialization Name"
+      required
+    />
+
+    <TextField
+    label="Degree effective date"
+      name="degreeEffectiveDate"
+      value={value.degreeEffectiveDate}
+      onChange={(text) =>
+        updateField("degreeEffectiveDate", text)
+      }
+      placeholder="YYYY-MM-DD"
+      required
+    />
+
+    <TextField
+      label="Name / Title of Post Graduate Diploma / Post Graduate Degree"
+      name="postGraduateQualification"
+      value={value.postGraduateQualification}
+      onChange={(text) =>
+        updateField("postGraduateQualification", text)
+      }
+      placeholder="Enter Post Graduate Qualification"
+    />
+
+    <TextField
+      label="Name of the University / Institute / College for Post Graduate Qualification"
+      name="postGraduateUniversity"
+      value={value.postGraduateUniversity}
+      onChange={(text) =>
+        updateField("postGraduateUniversity", text)
+      }
+      placeholder="Enter University / Institute / College Name"
+    />
+
+    <TextField
+      label="Specialization / Major for Post Graduate Qualification"
+      name="postGraduateSpecialization"
+      value={value.postGraduateSpecialization}
+      onChange={(text) =>
+        updateField("postGraduateSpecialization", text)
+      }
+      placeholder="Enter Specialization / Major"
+    />
+
+    <TextField
+      label="Post Graduate Qualification effective date"
+      name="postGraduateEffectiveDate"
+      value={value.postGraduateEffectiveDate}
+      onChange={(text) =>
+        updateField("postGraduateEffectiveDate", text)
+      }
+      placeholder="YYYY-MM-DD"
+    />
+
+</div>
 <br/>
   {/* =================================================
       SPECIALIZED FIELDS
   ================================================= */}
 
-  <div className="mt-8">
-    <h3 className="section-subtitle">
-      Specialized Fields
-    </h3>
+  {/* Academic ICT Fields */}
+<div className="mt-8">
+  <h3 className="section-subtitle">
+    ICT Specialized Fields - Academic Qualification
+  </h3>
 
-    <p className="field-example">
-      Select your rating from 1 to 5 for each specialized field.
-    </p>
+  <p className="field-example">
+    Indicate whether you have academically completed studies or
+    qualifications related to each ICT field.
+  </p>
 
-    <div className="specialized-fields-table">
-      <div className="specialized-header">
-        <div>
-          Specialized Field
-        </div>
+  <div className="specialized-fields-table">
 
-        <div>
-          Rating
-        </div>
-      </div>
-
-      {value.specializedFields.map(
-        (
-          field: SpecializedFieldRating,
-          index: number
-        ) => (
-          <div
-            className="specialized-row"
-            key={field.field}
-          >
-            <div className="specialized-field-name">
-              {field.field}
-            </div>
-
-            <div className="specialized-rating">
-              {[1, 2, 3, 4, 5].map(
-                (rating) => (
-                  <label
-                    key={rating}
-                    className="rating-option"
-                  >
-                    <input
-                      type="radio"
-                      name={`specialized-${index}`}
-                      value={rating}
-                      checked={
-                        field.rating === rating
-                      }
-                      onChange={() =>
-                        updateSpecializedField(
-                          index,
-                          rating
-                        )
-                      }
-                    />
-
-                    <span>
-                      {rating}
-                    </span>
-                  </label>
-                )
-              )}
-            </div>
-          </div>
-        )
-      )}
+    <div className="specialized-header academic-header">
+      <div>ICT Specialized Field</div>
+      <div>Academically Completed</div>
     </div>
+
+    {value.specializedFields.map(
+      (field: SpecializedField, index: number) => (
+        <div
+          className="specialized-row"
+          key={field.field}
+        >
+
+          <div className="specialized-field-name">
+
+            <div className="specialized-field-title">
+              {index + 1}. {field.field}
+            </div>
+            <div className="specialized-field-example">
+              <em>
+                {specializedFieldExamples[field.field].academic}
+              </em>
+            </div>
+
+          </div>
+
+          <div className="academic-options">
+
+            <label className="rating-option">
+              <input
+                type="radio"
+                name={`academic-${index}`}
+                value="Yes"
+                checked={
+                  field.academicCompleted === "Yes"
+                }
+                onChange={() =>
+                  updateAcademicStatus(index, "Yes")
+                }
+              />
+
+              <span>Yes</span>
+            </label>
+
+            <label className="rating-option">
+              <input
+                type="radio"
+                name={`academic-${index}`}
+                value="No"
+                checked={
+                  field.academicCompleted === "No"
+                }
+                onChange={() =>
+                  updateAcademicStatus(index, "No")
+                }
+              />
+
+              <span>No</span>
+            </label>
+
+          </div>
+
+        </div>
+      )
+    )}
+
   </div>
+</div>
+
+<br/>
+
+{/* Professional Experience */}
+<div className="mt-8">
+  <h3 className="section-subtitle">
+    ICT Specialized Fields - Professional Experience
+  </h3>
+
+  <p className="field-example">
+    Rate your professional experience in each ICT field from
+    1 to 5.
+  </p>
+
+  <div className="specialized-fields-table">
+
+    <div className="specialized-header">
+      <div>ICT Specialized Field</div>
+      <div>Professional Experience Rating</div>
+    </div>
+
+    {value.specializedFields.map(
+      (field: SpecializedField, index: number) => (
+        <div
+          className="specialized-row"
+          key={`experience-${field.field}`}
+        >
+
+          <div className="specialized-field-name">
+
+            <div className="specialized-field-title">
+              {index + 1}. {field.field}
+            </div>
+
+            <div className="specialized-field-example">
+              <em>
+                {specializedFieldExamples[field.field].professional}
+              </em>
+            </div>
+
+          </div>
+
+          <div className="specialized-rating">
+
+            {[1, 2, 3, 4, 5].map((rating) => (
+              <label
+                key={rating}
+                className="rating-option"
+              >
+                <input
+                  type="radio"
+                  name={`experience-${index}`}
+                  value={rating}
+                  checked={
+                    field.experienceRating === rating
+                  }
+                  onChange={() =>
+                    updateExperienceRating(
+                      index,
+                      rating
+                    )
+                  }
+                />
+
+                <span>{rating}</span>
+              </label>
+            ))}
+
+          </div>
+
+        </div>
+      )
+    )}
+
+  </div>
+</div>
+
 
 <br/>
   {/* =================================================

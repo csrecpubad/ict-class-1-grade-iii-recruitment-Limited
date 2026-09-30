@@ -27,7 +27,7 @@ export default function NICField({
 
   return (
     <TextField
-      label="National Identity Card Number / ජාතික හැඳුනුම්පත් අංකය / தேசிய அடையாள அட்டை எண்"
+      label="National Identity Card Number"
       name="nic"
       value={value}
       onChange={handleChange}

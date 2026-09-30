@@ -110,16 +110,24 @@ const [
   setEducationQualifications,
 ] =
   useState<EducationQualifications>({
-    qualification: "",
-
     alPassed: "",
-
     alStream: "",
-
+    alSub1: "",
+    alSub2: "",
+    alSub3: "",
+    qualification: "",
+    university: "",
+    specialization: "",
+    degreeEffectiveDate: "",
+    postGraduateQualification: "",
+    postGraduateUniversity: "",
+    postGraduateSpecialization: "",
+    postGraduateEffectiveDate: "",
     specializedFields:
       specializedFields.map((field) => ({
         field,
-        rating: null,
+        academicCompleted: "",
+        experienceRating: null,
       })),
 
     professionalMemberships: "",
