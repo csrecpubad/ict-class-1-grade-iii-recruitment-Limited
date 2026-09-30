@@ -14,25 +14,20 @@ import { specializedFieldExamples } from "../../constants/ictFields";
 
 interface ICTEducationQualificationsProps {
   value: EducationQualifications;
-  onChange: (
-    value: EducationQualifications
-  ) => void;
+  onChange: (value: EducationQualifications) => void;
 }
 
 export default function ICTEducationQualifications({
   value,
   onChange,
 }: ICTEducationQualificationsProps) {
-
   /* =====================================================
      GENERAL UPDATE
   ===================================================== */
 
-  const updateField = <
-    K extends keyof EducationQualifications
-  >(
+  const updateField = <K extends keyof EducationQualifications>(
     field: K,
-    fieldValue: EducationQualifications[K]
+    fieldValue: EducationQualifications[K],
   ) => {
     onChange({
       ...value,
@@ -44,578 +39,447 @@ export default function ICTEducationQualifications({
      SPECIALIZED FIELD RATING
   ===================================================== */
 
-  const updateAcademicStatus = (
-  index: number,
-  status: "Yes" | "No"
-) => {
-  const updatedFields = [...value.specializedFields];
+  const updateAcademicStatus = (index: number, status: "Yes" | "No") => {
+    const updatedFields = [...value.specializedFields];
 
-  updatedFields[index] = {
-    ...updatedFields[index],
-    academicCompleted: status,
+    updatedFields[index] = {
+      ...updatedFields[index],
+      academicCompleted: status,
+    };
+
+    updateField("specializedFields", updatedFields);
   };
 
-  updateField("specializedFields", updatedFields);
-};
+  const updateExperienceRating = (index: number, rating: number) => {
+    const updatedFields = [...value.specializedFields];
 
-const updateExperienceRating = (
-  index: number,
-  rating: number
-) => {
-  const updatedFields = [...value.specializedFields];
+    updatedFields[index] = {
+      ...updatedFields[index],
+      experienceRating: rating,
+    };
 
-  updatedFields[index] = {
-    ...updatedFields[index],
-    experienceRating: rating,
+    updateField("specializedFields", updatedFields);
   };
-
-  updateField("specializedFields", updatedFields);
-};
 
   return (
     <SectionCard
-  title="Education & Professional Qualifications"
-  number="04"
-  description="Please enter your education and professional qualification information"
->
-  {/* =================================================
+      title="Education & Professional Qualifications"
+      number="04"
+      description="Please enter your education and professional qualification information"
+    >
+      {/* =================================================
       EDUCATION QUALIFICATIONS
   ================================================= */}
 
-  <h3 className="section-subtitle">
-    Education Qualifications
-  </h3>
+      <h3 className="section-subtitle">Education Qualifications</h3>
 
-  <div className="form-grid">
+      <div className="form-grid">
         <SelectField
-      label="GCE A/L"
-      name="alPassed"
-      value={value.alPassed}
-      onChange={(selected) =>
-        updateField(
-          "alPassed",
-          selected as "Passed" | "Not passed" | ""
-        )
-      }
-      options={[
-        {
-          value: "Passed",
-          label: "Passed",
-        },
-        {
-          value: "Not passed",
-          label: "Not passed",
-        },
-      ]}
-      placeholder="Select"
-      required
-    />
-  </div>
+          label="GCE A/L"
+          name="alPassed"
+          value={value.alPassed}
+          onChange={(selected) =>
+            updateField("alPassed", selected as "Passed" | "Not passed" | "")
+          }
+          options={[
+            {
+              value: "Passed",
+              label: "Passed",
+            },
+            {
+              value: "Not passed",
+              label: "Not passed",
+            },
+          ]}
+          placeholder="Select"
+          required
+        />
 
-  <div className="mt-4">
-    <TextField
-      label="A/L Stream"
-      name="alStream"
-      value={value.alStream}
-      onChange={(text) =>
-        updateField("alStream", text)
-      }
-      placeholder="Enter A/L stream"
-      required
-    />
-    <TextField
-            label="Subject 01"
-            name="alSub1"
-            value={value.alSub1}
-            onChange={(value) =>
-              updateField("alSub1", value)
-            }
-            placeholder="Subject Name - Result"
-            required
-            // error={alErrors.alSub1}
-          />
+        <TextField
+          label="A/L Stream"
+          name="alStream"
+          value={value.alStream}
+          onChange={(text) => updateField("alStream", text)}
+          placeholder="Enter A/L stream"
+          required
+        />
 
-          <TextField
-            label="Subject 02"
-            name="alSub2"
-            value={value.alSub2}
-            onChange={(value) =>
-              updateField("alSub2", value)
-            }
-            placeholder="Subject Name - Result"
-            required
-            // error={alErrors.alSub2}
-          />
+        <TextField
+          label="Subject 01"
+          name="alSub1"
+          value={value.alSub1}
+          onChange={(value) => updateField("alSub1", value)}
+          placeholder="Subject Name - Result"
+          required
+          // error={alErrors.alSub1}
+        />
 
-          <TextField
-            label="Subject 03"
-            name="alSub3"
-            value={value.alSub3}
-            onChange={(value) =>
-              updateField("alSub3", value)
-            }
-            placeholder="Subject Name - Result"
-            required
-            // error={alErrors.alSub3}
-          />
+        <TextField
+          label="Subject 02"
+          name="alSub2"
+          value={value.alSub2}
+          onChange={(value) => updateField("alSub2", value)}
+          placeholder="Subject Name - Result"
+          required
+          // error={alErrors.alSub2}
+        />
 
-    <TextField
-      label="Title / Name of the Degree"
-      name="qualification"
-      value={value.qualification}
-      onChange={(text) =>
-        updateField("qualification", text)
-      }
-      placeholder="Full BSc. in ICT (3 years)"
-      required
-    />
+        <TextField
+          label="Subject 03"
+          name="alSub3"
+          value={value.alSub3}
+          onChange={(value) => updateField("alSub3", value)}
+          placeholder="Subject Name - Result"
+          required
+          // error={alErrors.alSub3}
+        />
 
-    <TextField
-    label="University / Institute / College"
-      name="university"
-      value={value.university}
-      onChange={(text) =>
-        updateField("university", text)
-      }
-      placeholder="University Name"
-      required
-    />
+        <TextField
+          label="Title / Name of the Degree"
+          name="qualification"
+          value={value.qualification}
+          onChange={(text) => updateField("qualification", text)}
+          placeholder="Full BSc. in ICT (3 years)"
+          required
+        />
 
-    <TextField
-      label="Specialization / Major"
-      name="specialization"
-      value={value.specialization}
-      onChange={(text) =>
-        updateField("specialization", text)
-      }
-      placeholder="Specialization Name"
-      required
-    />
+        <TextField
+          label="University / Institute / College"
+          name="university"
+          value={value.university}
+          onChange={(text) => updateField("university", text)}
+          placeholder="University Name"
+          required
+        />
 
-    <TextField
-    label="Degree effective date"
-      name="degreeEffectiveDate"
-      value={value.degreeEffectiveDate}
-      onChange={(text) =>
-        updateField("degreeEffectiveDate", text)
-      }
-      placeholder="YYYY-MM-DD"
-      required
-    />
+        <TextField
+          label="Specialization / Major"
+          name="specialization"
+          value={value.specialization}
+          onChange={(text) => updateField("specialization", text)}
+          placeholder="Specialization Name"
+          required
+        />
 
-    <TextField
-      label="Name / Title of Post Graduate Diploma / Post Graduate Degree"
-      name="postGraduateQualification"
-      value={value.postGraduateQualification}
-      onChange={(text) =>
-        updateField("postGraduateQualification", text)
-      }
-      placeholder="Enter Post Graduate Qualification"
-    />
+        <TextField
+          label="Degree effective date"
+          name="degreeEffectiveDate"
+          value={value.degreeEffectiveDate}
+          onChange={(text) => updateField("degreeEffectiveDate", text)}
+          placeholder="YYYY-MM-DD"
+          required
+        />
 
-    <TextField
-      label="Name of the University / Institute / College for Post Graduate Qualification"
-      name="postGraduateUniversity"
-      value={value.postGraduateUniversity}
-      onChange={(text) =>
-        updateField("postGraduateUniversity", text)
-      }
-      placeholder="Enter University / Institute / College Name"
-    />
+        <TextField
+          label="Name / Title of Post Graduate Diploma / Post Graduate Degree"
+          name="postGraduateQualification"
+          value={value.postGraduateQualification}
+          onChange={(text) => updateField("postGraduateQualification", text)}
+          placeholder="Enter Post Graduate Qualification"
+        />
 
-    <TextField
-      label="Specialization / Major for Post Graduate Qualification"
-      name="postGraduateSpecialization"
-      value={value.postGraduateSpecialization}
-      onChange={(text) =>
-        updateField("postGraduateSpecialization", text)
-      }
-      placeholder="Enter Specialization / Major"
-    />
+        <TextField
+          label="Name of the University / Institute / College for Post Graduate Qualification"
+          name="postGraduateUniversity"
+          value={value.postGraduateUniversity}
+          onChange={(text) => updateField("postGraduateUniversity", text)}
+          placeholder="Enter University / Institute / College Name"
+        />
 
-    <TextField
-      label="Post Graduate Qualification effective date"
-      name="postGraduateEffectiveDate"
-      value={value.postGraduateEffectiveDate}
-      onChange={(text) =>
-        updateField("postGraduateEffectiveDate", text)
-      }
-      placeholder="YYYY-MM-DD"
-    />
+        <TextField
+          label="Specialization / Major for Post Graduate Qualification"
+          name="postGraduateSpecialization"
+          value={value.postGraduateSpecialization}
+          onChange={(text) => updateField("postGraduateSpecialization", text)}
+          placeholder="Enter Specialization / Major"
+        />
 
-</div>
-<br/>
-  {/* =================================================
+        <TextField
+          label="Post Graduate Qualification effective date"
+          name="postGraduateEffectiveDate"
+          value={value.postGraduateEffectiveDate}
+          onChange={(text) => updateField("postGraduateEffectiveDate", text)}
+          placeholder="YYYY-MM-DD"
+        />
+      </div>
+      <br />
+      {/* =================================================
       SPECIALIZED FIELDS
   ================================================= */}
 
-  {/* Academic ICT Fields */}
-<div className="mt-8">
-  <h3 className="section-subtitle">
-    ICT Specialized Fields - Academic Qualification
-  </h3>
+      {/* Academic ICT Fields */}
+      <div className="mt-8">
+        <h3 className="section-subtitle">
+          ICT Specialized Fields - Academic Qualification
+        </h3>
 
-  <p className="field-example">
-    Indicate whether you have academically completed studies or
-    qualifications related to each ICT field.
-  </p>
+        <p className="field-example">
+          Indicate whether you have academically completed studies or
+          qualifications related to each ICT field.
+        </p>
 
-  <div className="specialized-fields-table">
-
-    <div className="specialized-header academic-header">
-      <div>ICT Specialized Field</div>
-      <div>Academically Completed</div>
-    </div>
-
-    {value.specializedFields.map(
-      (field: SpecializedField, index: number) => (
-        <div
-          className="specialized-row"
-          key={field.field}
-        >
-
-          <div className="specialized-field-name">
-
-            <div className="specialized-field-title">
-              {index + 1}. {field.field}
-            </div>
-            <div className="specialized-field-example">
-              <em>
-                {specializedFieldExamples[field.field].academic}
-              </em>
-            </div>
-
+        <div className="specialized-fields-table">
+          <div className="specialized-header academic-header">
+            <div>ICT Specialized Field</div>
+            <div>Academically Completed</div>
           </div>
 
-          <div className="academic-options">
+          {value.specializedFields.map(
+            (field: SpecializedField, index: number) => (
+              <div className="specialized-row" key={field.field}>
+                <div className="specialized-field-name">
+                  <div className="specialized-field-title">
+                    {index + 1}. {field.field}
+                  </div>
+                  <div className="specialized-field-example">
+                    <em>{specializedFieldExamples[field.field].academic}</em>
+                  </div>
+                </div>
 
-            <label className="rating-option">
-              <input
-                type="radio"
-                name={`academic-${index}`}
-                value="Yes"
-                checked={
-                  field.academicCompleted === "Yes"
-                }
-                onChange={() =>
-                  updateAcademicStatus(index, "Yes")
-                }
-              />
+                <div className="academic-options">
+                  <label className="rating-option">
+                    <input
+                      type="radio"
+                      name={`academic-${index}`}
+                      value="Yes"
+                      checked={field.academicCompleted === "Yes"}
+                      onChange={() => updateAcademicStatus(index, "Yes")}
+                    />
 
-              <span>Yes</span>
-            </label>
+                    <span>Yes</span>
+                  </label>
 
-            <label className="rating-option">
-              <input
-                type="radio"
-                name={`academic-${index}`}
-                value="No"
-                checked={
-                  field.academicCompleted === "No"
-                }
-                onChange={() =>
-                  updateAcademicStatus(index, "No")
-                }
-              />
+                  <label className="rating-option">
+                    <input
+                      type="radio"
+                      name={`academic-${index}`}
+                      value="No"
+                      checked={field.academicCompleted === "No"}
+                      onChange={() => updateAcademicStatus(index, "No")}
+                    />
 
-              <span>No</span>
-            </label>
-
-          </div>
-
+                    <span>No</span>
+                  </label>
+                </div>
+              </div>
+            ),
+          )}
         </div>
-      )
-    )}
+      </div>
 
-  </div>
-</div>
+      <br />
 
-<br/>
+      {/* Professional Experience */}
+      <div className="mt-8">
+        <h3 className="section-subtitle">
+          ICT Specialized Fields - Professional Experience
+        </h3>
 
-{/* Professional Experience */}
-<div className="mt-8">
-  <h3 className="section-subtitle">
-    ICT Specialized Fields - Professional Experience
-  </h3>
+        <p className="field-example">
+          Rate your professional experience in each ICT field from 1 to 5.
+        </p>
 
-  <p className="field-example">
-    Rate your professional experience in each ICT field from
-    1 to 5.
-  </p>
-
-  <div className="specialized-fields-table">
-
-    <div className="specialized-header">
-      <div>ICT Specialized Field</div>
-      <div>Professional Experience Rating</div>
-    </div>
-
-    {value.specializedFields.map(
-      (field: SpecializedField, index: number) => (
-        <div
-          className="specialized-row"
-          key={`experience-${field.field}`}
-        >
-
-          <div className="specialized-field-name">
-
-            <div className="specialized-field-title">
-              {index + 1}. {field.field}
-            </div>
-
-            <div className="specialized-field-example">
-              <em>
-                {specializedFieldExamples[field.field].professional}
-              </em>
-            </div>
-
+        <div className="specialized-fields-table">
+          <div className="specialized-header">
+            <div>ICT Specialized Field</div>
+            <div>Professional Experience Rating</div>
           </div>
 
-          <div className="specialized-rating">
-
-            {[1, 2, 3, 4, 5].map((rating) => (
-              <label
-                key={rating}
-                className="rating-option"
+          {value.specializedFields.map(
+            (field: SpecializedField, index: number) => (
+              <div
+                className="specialized-row"
+                key={`experience-${field.field}`}
               >
-                <input
-                  type="radio"
-                  name={`experience-${index}`}
-                  value={rating}
-                  checked={
-                    field.experienceRating === rating
-                  }
-                  onChange={() =>
-                    updateExperienceRating(
-                      index,
-                      rating
-                    )
-                  }
-                />
+                <div className="specialized-field-name">
+                  <div className="specialized-field-title">
+                    {index + 1}. {field.field}
+                  </div>
 
-                <span>{rating}</span>
-              </label>
-            ))}
+                  <div className="specialized-field-example">
+                    <em>
+                      {specializedFieldExamples[field.field].professional}
+                    </em>
+                  </div>
+                </div>
 
-          </div>
+                <div className="specialized-rating">
+                  {[1, 2, 3, 4, 5].map((rating) => (
+                    <label key={rating} className="rating-option">
+                      <input
+                        type="radio"
+                        name={`experience-${index}`}
+                        value={rating}
+                        checked={field.experienceRating === rating}
+                        onChange={() => updateExperienceRating(index, rating)}
+                      />
 
+                      <span>{rating}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            ),
+          )}
         </div>
-      )
-    )}
+      </div>
 
-  </div>
-</div>
-
-
-<br/>
-  {/* =================================================
+      <br />
+      {/* =================================================
       PROFESSIONAL MEMBERSHIPS
   ================================================= */}
 
-  <div className="mt-8">
-    <h3 className="section-subtitle">
-      Professional Memberships
-    </h3>
+      <div className="mt-8">
+        <h3 className="section-subtitle">Professional Memberships</h3>
 
-    <TextField
-      label="Professional Memberships"
-      name="professionalMemberships"
-      value={value.professionalMemberships}
-      onChange={(text) =>
-        updateField(
-          "professionalMemberships",
-          text
-        )
-      }
-      placeholder="Enter professional memberships"
-      fullWidth
-    />
-  </div>
+        <TextField
+          label="Professional Memberships"
+          name="professionalMemberships"
+          value={value.professionalMemberships}
+          onChange={(text) => updateField("professionalMemberships", text)}
+          placeholder="Enter professional memberships"
+          fullWidth
+        />
+      </div>
 
-<br/>
-  {/* =================================================
+      <br />
+      {/* =================================================
       PROFESSIONAL QUALIFICATIONS
   ================================================= */}
 
-  <div className="mt-8">
-    <h3 className="section-subtitle">
-      Professional Qualifications
-    </h3>
+        <h3 className="section-subtitle">Professional Qualifications</h3>
+      <div className="form-grid">
+        <TextField
+          label="Professional Qualifications"
+          name="professionalQualifications"
+          value={value.professionalQualifications}
+          onChange={(text) => updateField("professionalQualifications", text)}
+          placeholder="Enter professional qualifications"
+        />
 
-    <TextField
-      label="Professional Qualifications"
-      name="professionalQualifications"
-      value={value.professionalQualifications}
-      onChange={(text) =>
-        updateField(
-          "professionalQualifications",
-          text
-        )
-      }
-      placeholder="Enter professional qualifications"
-      fullWidth
-    />
+        <TextField
+          label="If Other"
+          name="professionalQualificationsOther"
+          value={value.professionalQualificationsOther}
+          onChange={(text) =>
+            updateField("professionalQualificationsOther", text)
+          }
+          placeholder="If other, please specify"
+        />
+      </div>
 
-    <div className="mt-4">
-      <TextField
-        label="If Other"
-        name="professionalQualificationsOther"
-        value={value.professionalQualificationsOther}
-        onChange={(text) =>
-          updateField(
-            "professionalQualificationsOther",
-            text
-          )
-        }
-        placeholder="If other, please specify"
-        fullWidth
-      />
-    </div>
-  </div>
-
-<br/>
-  {/* =================================================
+      <br />
+      {/* =================================================
       TECHNOLOGY SKILLS
   ================================================= */}
 
-  <div className="mt-8">
-    <h3 className="section-subtitle">
-      Fluency in Programming Languages,
-      Frameworks and related new Technologies
-    </h3>
+      <div className="mt-8">
+        <h3 className="section-subtitle">
+          Fluency in Programming Languages, Frameworks and related new
+          Technologies
+        </h3>
 
-    <TextField
-      label="Programming Languages / Frameworks / Technologies"
-      name="technologySkills"
-      value={value.technologySkills}
-      onChange={(text) =>
-        updateField(
-          "technologySkills",
-          text
-        )
-      }
-      placeholder="Enter programming languages, frameworks and technologies"
-      fullWidth
-    />
-  </div>
+        <TextField
+          label="Programming Languages / Frameworks / Technologies"
+          name="technologySkills"
+          value={value.technologySkills}
+          onChange={(text) => updateField("technologySkills", text)}
+          placeholder="Enter programming languages, frameworks and technologies"
+          fullWidth
+        />
+      </div>
 
-      <br/>
-  {/* =================================================
+      <br />
+      {/* =================================================
       RESEARCH PAPERS
   ================================================= */}
 
-  <div className="mt-8">
-    <h3 className="section-subtitle">
-      Published Research Papers
-    </h3>
+      <div className="mt-8">
+        <h3 className="section-subtitle">Published Research Papers</h3>
 
-    <div className="form-grid">
-
-      <TextField
-        label="Topic"
-        name="researchTopic"
-        value={value.researchPaper.topic}
-        onChange={(text) =>
-          updateField(
-            "researchPaper",
-            {
-              ...value.researchPaper,
-              topic: text,
+        <div className="form-grid">
+          <TextField
+            label="Topic"
+            name="researchTopic"
+            value={value.researchPaper.topic}
+            onChange={(text) =>
+              updateField("researchPaper", {
+                ...value.researchPaper,
+                topic: text,
+              })
             }
-          )
-        }
-        placeholder="Enter research paper topic"
-      />
+            placeholder="Enter research paper topic"
+          />
 
-      <TextField
-        label="Year"
-        name="researchYear"
-        value={value.researchPaper.year}
-        onChange={(text) =>
-          updateField(
-            "researchPaper",
-            {
-              ...value.researchPaper,
-              year: text,
+          <TextField
+            label="Year"
+            name="researchYear"
+            value={value.researchPaper.year}
+            onChange={(text) =>
+              updateField("researchPaper", {
+                ...value.researchPaper,
+                year: text,
+              })
             }
-          )
-        }
-        placeholder="Enter year"
-        type="number"
-      />
+            placeholder="Enter year"
+            type="number"
+          />
 
-      <SelectField
-        label="Local / International"
-        name="researchType"
-        value={value.researchPaper.type}
-        onChange={(selected) =>
-          updateField(
-            "researchPaper",
-            {
-              ...value.researchPaper,
-              type: selected as
-                | "Local"
-                | "International"
-                | "",
+          <SelectField
+            label="Local / International"
+            name="researchType"
+            value={value.researchPaper.type}
+            onChange={(selected) =>
+              updateField("researchPaper", {
+                ...value.researchPaper,
+                type: selected as "Local" | "International" | "",
+              })
             }
-          )
-        }
-        options={[
-          {
-            value: "Local",
-            label: "Local",
-          },
-          {
-            value: "International",
-            label: "International",
-          },
-        ]}
-        placeholder="Select"
-      />
+            options={[
+              {
+                value: "Local",
+                label: "Local",
+              },
+              {
+                value: "International",
+                label: "International",
+              },
+            ]}
+            placeholder="Select"
+          />
 
-      <TextField
-        label="Institute / Magazine"
-        name="researchInstitute"
-        value={
-          value.researchPaper.instituteOrMagazine
-        }
-        onChange={(text) =>
-          updateField(
-            "researchPaper",
-            {
-              ...value.researchPaper,
-              instituteOrMagazine: text,
+          <TextField
+            label="Institute / Magazine"
+            name="researchInstitute"
+            value={value.researchPaper.instituteOrMagazine}
+            onChange={(text) =>
+              updateField("researchPaper", {
+                ...value.researchPaper,
+                instituteOrMagazine: text,
+              })
             }
-          )
-        }
-        placeholder="Enter institute or magazine"
-      />
+            placeholder="Enter institute or magazine"
+          />
+        </div>
+      </div>
 
-    </div>
-  </div>
-
-<br/>
-  {/* =================================================
+      <br />
+      {/* =================================================
       AWARDS
   ================================================= */}
 
-  <div className="mt-8">
-    <h3 className="section-subtitle">
-      Awards
-    </h3>
+      <div className="mt-8">
+        <h3 className="section-subtitle">Awards</h3>
 
-    <TextField
-      label="Awards"
-      name="awards"
-      value={value.awards}
-      onChange={(text) =>
-        updateField("awards", text)
-      }
-      placeholder="Enter awards"
-      fullWidth
-    />
-  </div>
-
-</SectionCard>
+        <TextField
+          label="Awards"
+          name="awards"
+          value={value.awards}
+          onChange={(text) => updateField("awards", text)}
+          placeholder="Enter awards"
+          fullWidth
+        />
+      </div>
+    </SectionCard>
   );
 }
