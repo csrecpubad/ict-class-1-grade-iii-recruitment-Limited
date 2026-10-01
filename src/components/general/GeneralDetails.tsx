@@ -35,7 +35,7 @@ export default function GeneralDetails({
             onChange("callingNumber", value)
           }
           placeholder="Enter interview calling number"
-          example="Example: ICTS/1-III/L/001"
+          example="Example: ICTS/1-III/2026/L/S/1A/001"
           required
           error={errors.callingNumber}
         />
