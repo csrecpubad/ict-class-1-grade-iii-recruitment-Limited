@@ -13,7 +13,7 @@ export default function Header() {
               </h3>
               <h1>Candidate Evaluation Management System (CEMS)</h1>
               <h2>
-                ශ්‍රී ලංකා තොරතුරු හා සන්නිවේදන තාක්ෂණ සේවයේ 1 පන්තියේ III ශ්‍රේණියට බඳවා ගැනීමේ සීමිත තරග විභාගය - 2025(2026)
+                ශ්‍රී ලංකා තොරතුරු හා සන්නිවේදන තාක්ෂණ සේවයේ 1 පන්තිය III ශ්‍රේණියට බඳවා ගැනීමේ සීමිත තරග විභාගය - 2025(2026)
               </h2>
               <h2> Limited Competitive Examination for Recruitment to Grade III of Class 1 of Sri Lanka Information and 
                 Communication Technology Service - 2025(2026)

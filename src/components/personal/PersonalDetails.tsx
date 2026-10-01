@@ -184,7 +184,7 @@ export default function PersonalDetails({
           value={data.nameEnglish}
           onChange={(value) => onChange("nameEnglish", value)}
           placeholder="Enter name with initials"
-          example="Example: R.D.K.S.Kumarasinghe"
+          example="Example: B.A.C.D. Perera"
           required
           error={errors.nameEnglish}
         />
@@ -196,7 +196,7 @@ export default function PersonalDetails({
           value={data.nameSinhala}
           onChange={(value) => onChange("nameSinhala", value)}
           placeholder="Enter name with initials"
-          example="Example: ආර්.ඩී.කේ.එස්.කුමාරසිංහ / ஆர்.டி.கே.எஸ்.குமாரசிங்கே"
+          example="Example: බී.ඒ්.සී.ඩී.පෙරේරා / பி.ஏ.சி.டி.பெரேரா"
           required
           error={errors.nameSinhala}
         />
@@ -208,7 +208,7 @@ export default function PersonalDetails({
           value={data.fullNameEnglish}
           onChange={(value) => onChange("fullNameEnglish", value)}
           placeholder="Enter full name"
-          example="Example: Ruwan Dinesh Kumara saman Kumarasinghe"
+          example="Example: Balasooriya Arachchige Chaminda Dushantha Perera"
           required
           error={errors.fullNameEnglish}
         />
@@ -220,7 +220,7 @@ export default function PersonalDetails({
           value={data.fullNameSinhala}
           onChange={(value) => onChange("fullNameSinhala", value)}
           placeholder="Enter full name"
-          example="Example: රුවන් දිනයේෂ් කුමාර සමන් කුමාරසිංහ / ருவான் தினேஷ் குமார சமன் குமாரசிங்கே"
+          example="Example: බාලසූරිය ආරච්චිගේ චමින්ද දුෂාන්ත පෙරේරා / பாலசூரிய ஆராச்சிகே சமிந்த துஷாந்த பெரேரா"
           required
           error={errors.fullNameSinhala}
         />
